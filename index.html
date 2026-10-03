@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punto de Quiebre y Activación Energética | Brujo Rodrigo</title>
+<meta name="description" content="Evento digital con Rodrigo Vega, jueves 22 de octubre 19:30hs. Reservá tu lugar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bordo:#000000;
+    --bordo-2:#141414;
+    --crema:#f4d9ac;      /* tono claro — texto de lectura */
+    --dorado:#c9a66b;     /* tono acento — CTA, bordes, detalles */
+    --carbon:#1A1A1A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    position:relative;
+    background:var(--bordo);
+    color:var(--crema);
+    font-family:'Poppins',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* ===== Fondo con imagen difuminada =====
+     Reemplazar background-image por la imagen final (subida como base64
+     o como archivo aparte). Mientras tanto queda un placeholder sutil con
+     el mismo tratamiento (blur + overlay oscuro) para previsualizar el
+     efecto de profundidad. */
+  /* ===== Fondo con imagen difuminada, apoyada en ambos costados =====
+     Dos franjas laterales (izq. / der. espejada) con la misma imagen,
+     dejando el centro despejado para el contenido. */
+  /* ===== Fondo con imagen difuminada, a pantalla completa ===== */
+  .bg-layer{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    background-image:url('IMGPLACEHOLDER');
+    background-size:cover;
+    background-position:center 40%;
+    background-repeat:no-repeat;
+    filter:blur(7px) saturate(112%);
+    transform:scale(1.06);
+    opacity:0.55;
+    pointer-events:none;
+  }
+
+  .bg-overlay{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.5) 100%);
+    pointer-events:none;
+  }
+  .principal, #gracias{position:relative;z-index:2;}
+
+  h1,h2,h3,.display{
+    font-family:'Playfair Display',serif;
+    font-weight:800;
+    letter-spacing:0.01em;
+    line-height:1.15;
+    color:var(--crema);
+  }
+  .accent{color:var(--dorado);}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;}
+
+  /* barra de urgencia + contador grande */
+  a.bar{display:block;font-size:18px;font-weight:700;padding:16px 16px;letter-spacing:0.05em;}
+  .bar-text{line-height:1.35;}
+  .bar-text .sep{margin:0 8px;}
+  .bar-text .nw{white-space:nowrap;}
+  .top-cd{
+    display:flex;justify-content:center;gap:18px;
+    margin-top:34px;padding:38px 16px;
+    text-decoration:none;
+    background:linear-gradient(90deg,#c29a60 0%,#d2ae72 35%,#e6c485 65%,#cfa86c 100%);
+    border-top:1px solid rgba(255,230,180,0.35);
+    border-bottom:1px solid rgba(0,0,0,0.25);
+  }
+  .tcd-u{
+    width:102px;height:108px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border-radius:14px;
+    background:linear-gradient(160deg,#b98f55 0%,#a57b43 55%,#8f6734 100%);
+    border:1px solid rgba(255,235,195,0.45);
+    box-shadow:0 12px 24px rgba(80,50,15,0.35), inset 0 1px 0 rgba(255,240,210,0.25);
+  }
+  .tcd-n{
+    font-family:'Cormorant Garamond',serif;font-weight:700;
+    font-size:46px;line-height:1;color:#fff8ec;
+    font-variant-numeric:oldstyle-nums tabular-nums;
+    text-shadow:0 2px 6px rgba(60,35,5,0.35);
+  }
+  .tcd-l{
+    margin-top:8px;font-size:12px;font-weight:600;
+    letter-spacing:0.06em;text-transform:uppercase;color:#fff3de;
+  }
+  @media (max-width:560px){
+    a.bar{font-size:14px;padding:12px 10px;letter-spacing:0.03em;}
+    .bar-text .sep{margin:0 4px;}
+    .bar-text .sep-mid{display:none;}
+    .bar-text .nw{display:block;}
+    .top-cd{gap:10px;margin-top:22px;padding:24px 12px;}
+    .tcd-u{width:72px;height:80px;border-radius:12px;}
+    .tcd-n{font-size:34px;}
+    .tcd-l{font-size:10px;margin-top:5px;}
+  }
+  .bar{
+    background:var(--dorado);
+    color:var(--bordo);
+    text-align:center;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.04em;
+    padding:10px 16px;
+    text-transform:uppercase;
+  }
+
+
+  /* brillo que cruza las franjas doradas cada tanto */
+  a.bar, .top-cd{position:relative;overflow:hidden;}
+  a.bar > *, .top-cd > *{position:relative;z-index:1;}
+  a.bar::after, .top-cd::after{
+    content:"";position:absolute;top:0;bottom:0;left:-40%;width:35%;
+    background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,250,230,0.55) 50%,rgba(255,255,255,0) 100%);
+    transform:skewX(-20deg) translateX(0);
+    animation:brillo 4s ease-in-out infinite;
+    pointer-events:none;z-index:0;
+  }
+  .top-cd::after{animation-delay:0.35s;}
+  @keyframes brillo{
+    0%{left:-40%;}
+    37.5%{left:120%;}
+    100%{left:120%;}
+  }
+  @media (prefers-reduced-motion:reduce){a.bar::after,.top-cd::after{animation:none;display:none;}}
+
+
+  /* sombreado negro en los márgenes laterales de las franjas doradas */
+  a.bar::before, .top-cd::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:linear-gradient(90deg,
+      rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 9%, rgba(0,0,0,0) 24%,
+      rgba(0,0,0,0) 76%, rgba(0,0,0,0.45) 91%, rgba(0,0,0,0.85) 100%);
+  }
+  @media (max-width:560px){
+    a.bar::before, .top-cd::before{
+      background:linear-gradient(90deg,
+        rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(0,0,0,0.7) 100%);
+    }
+  }
+
+
+  /* video más grande + brillo que circula por el borde */
+  .video-section .wrap{max-width:940px;}
+  .video-frame{
+    padding:3px;
+    border:none !important;
+    background:rgba(201,166,107,0.35) !important;
+    isolation:isolate;
+  }
+  .video-frame::before{
+    content:"";position:absolute;left:50%;top:50%;
+    width:130%;aspect-ratio:1/1;
+    transform:translate(-50%,-50%) rotate(0deg);
+    background:conic-gradient(from 0deg,
+      rgba(255,250,230,0) 0deg, rgba(255,250,230,0) 210deg,
+      rgba(201,166,107,0.95) 290deg, #fff8e6 345deg, rgba(255,250,230,0) 360deg);
+    animation:borde-brillo 4s linear infinite;
+    z-index:0;pointer-events:none;
+  }
+  .video-frame video{position:relative;z-index:1;border-radius:11px;}
+  @keyframes borde-brillo{to{transform:translate(-50%,-50%) rotate(360deg);}}
+  @media (prefers-reduced-motion:reduce){.video-frame::before{animation:none;display:none;}}
+
+
+  /* ===== Hero estilo tarjeta (título con brillo dorado) ===== */
+  .hero2{padding:40px 0 30px;}
+  .hero2 .wrap{max-width:760px;}
+  .h2-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Cinzel',serif;font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
+    color:#fff4dc;padding:8px 16px;border-radius:999px;
+    background:linear-gradient(135deg,rgba(201,166,107,0.55),rgba(120,90,45,0.55));
+    border:1px solid rgba(244,217,172,0.55);box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    margin-bottom:20px;
+  }
+  .h2-badge .dot{width:7px;height:7px;border-radius:50%;background:#fff4dc;box-shadow:0 0 8px #fff4dc;}
+  .h2-title{margin:0 auto 18px;line-height:1.12;}
+  .h2-light{
+    display:block;font-family:'Poppins',sans-serif;font-weight:300;
+    font-size:clamp(28px,5.2vw,48px);color:#f5efe4;letter-spacing:-0.01em;margin-bottom:6px;
+  }
+  .h2-gold{
+    display:block;font-family:'Cinzel',serif;font-weight:700;
+    font-size:clamp(26px,5vw,46px);letter-spacing:0.01em;line-height:1.18;
+    background:linear-gradient(100deg,#b8894a 0%,#e9c98d 22%,#fff3d0 32%,#e9c98d 42%,#c9a66b 60%,#e2bf80 80%,#b8894a 100%);
+    background-size:250% 100%;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:oro-titulo 4s linear infinite;
+    filter:drop-shadow(0 2px 10px rgba(0,0,0,0.45));
+  }
+  @keyframes oro-titulo{0%{background-position:100% 0;}100%{background-position:-150% 0;}}
+  .h2-sub{
+    max-width:600px;margin:0 auto 26px;font-size:16px;line-height:1.65;color:#efe6d6;
+  }
+  .h2-card{
+    max-width:470px;margin:0 auto 28px;padding:20px 20px 18px;border-radius:18px;
+    background:linear-gradient(160deg,rgba(28,24,20,0.92),rgba(8,8,8,0.92));
+    border:1px solid rgba(201,166,107,0.35);
+    box-shadow:0 18px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,240,210,0.06);
+  }
+  .h2-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding-bottom:16px;border-bottom:1px solid rgba(201,166,107,0.2);}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:13px;font-weight:500;color:#f1e7d4;
+    padding:7px 13px;border-radius:999px;border:1px solid rgba(201,166,107,0.3);background:rgba(255,255,255,0.03);
+  }
+  .chip svg{width:15px;height:15px;fill:none;stroke:var(--dorado);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  .h2-time{display:flex;align-items:center;justify-content:center;gap:16px;padding-top:16px;text-align:left;}
+  .orb{
+    flex:0 0 auto;width:48px;height:48px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,rgba(255,246,220,0.85) 0%,rgba(201,166,107,0.45) 22%,rgba(30,26,20,0.95) 60%,#000 100%);
+    border:2px solid #e9d3a6;box-shadow:0 0 16px rgba(201,166,107,0.45), inset 0 0 10px rgba(0,0,0,0.6);
+  }
+  .t-label{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--dorado);}
+  .t-value{font-family:'Cinzel',serif;font-size:clamp(24px,4.4vw,30px);font-weight:600;letter-spacing:0.06em;color:#f7efe0;text-transform:uppercase;line-height:1.25;}
+  .t-sub{font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#d9c7a4;margin-top:2px;}
+  .h2-title span{text-wrap:balance;}
+  .h2-cta{
+    display:inline-block;text-decoration:none;
+    font-family:'Cinzel',serif;font-weight:700;font-size:15px;letter-spacing:0.2em;text-transform:uppercase;
+    color:#1a1206;padding:18px 46px;border-radius:999px;
+    background:linear-gradient(100deg,#b8894a 0%,#e6c686 45%,#f6e2b0 55%,#c9a66b 100%);
+    box-shadow:0 10px 26px rgba(201,166,107,0.3), inset 0 1px 0 rgba(255,250,235,0.6);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .h2-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(201,166,107,0.4), inset 0 1px 0 rgba(255,250,235,0.6);}
+  .h2-price{margin-top:14px;font-size:15px;color:#d9cdb8;}
+  .h2-price b{color:var(--dorado);font-weight:700;font-size:17px;}
+  @media (max-width:560px){
+    .hero2{padding:30px 0 24px;}
+    .h2-sub{font-size:15px;}
+    .h2-card{padding:16px 14px;}
+    .chip{font-size:12px;padding:6px 11px;}
+    .h2-time{gap:12px;}
+    .orb{width:40px;height:40px;}
+    .h2-cta{padding:16px 34px;font-size:14px;letter-spacing:0.16em;}
+  }
+  @media (prefers-reduced-motion:reduce){.h2-gold{animation:none;}}
+
+
+  /* ===== Prueba: texto a la izquierda, video a la derecha (solo compu) ===== */
+  @media (min-width:980px){
+    .hero-split{
+      display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);
+      align-items:center;gap:48px;
+      max-width:1480px;margin:0 auto;padding:48px 40px 40px;
+    }
+    .hero-split .hero2{order:1;padding:0;text-align:left;}
+    .hero-split .video-section{order:2;padding:0;}
+    .hero-split .wrap{max-width:none;padding:0;margin:0;}
+    .hero-split .h2-title span{text-wrap:pretty;}
+    .hero-split .h2-sub{margin-left:0;max-width:540px;}
+    .hero-split .h2-card{margin-left:0;}
+    .hero-split .h2-chips{justify-content:flex-start;}
+    .hero-split .h2-time{justify-content:flex-start;}
+    .hero-split .h2-light{font-size:clamp(24px,2.3vw,36px);}
+    .hero-split .h2-gold{font-size:clamp(24px,2.5vw,40px);}
+  }
+
+
+  /* ===== Frase con recuadro dorado + flecha ===== */
+  .frase-section{position:relative;z-index:6;text-align:center;padding:70px 0 84px;}
+  .frase-section .wrap{max-width:1000px;}
+  .frase-light{
+    font-family:'Poppins',sans-serif;font-weight:300;color:#f5efe4;
+    font-size:clamp(22px,3vw,36px);line-height:1.3;max-width:900px;margin:0 auto 24px;text-wrap:balance;
+  }
+  .frase-box{
+    position:relative;display:inline-block;max-width:860px;
+    padding:18px 26px;border:1px solid rgba(201,166,107,0.35);
+  }
+  .frase-box::before,.frase-box::after{
+    content:"";position:absolute;width:16px;height:16px;pointer-events:none;
+  }
+  .frase-box::before{top:-1px;left:-1px;border-top:2px solid var(--dorado);border-left:2px solid var(--dorado);}
+  .frase-box::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--dorado);border-right:2px solid var(--dorado);}
+  .frase-box .frase-gold{position:relative;display:block;}
+  .frase-box .frase-gold::before,.frase-box .frase-gold::after{
+    content:"";position:absolute;width:16px;height:16px;pointer-events:none;
+  }
+  .frase-box .frase-gold::before{top:-19px;right:-27px;border-top:2px solid var(--dorado);border-right:2px solid var(--dorado);}
+  .frase-box .frase-gold::after{bottom:-19px;left:-27px;border-bottom:2px solid var(--dorado);border-left:2px solid var(--dorado);}
+  .frase-gold{
+    font-family:'Cinzel',serif;font-weight:700;font-size:clamp(18px,2.4vw,30px);line-height:1.3;letter-spacing:0.02em;
+    text-wrap:balance;
+    background:linear-gradient(100deg,#b8894a 0%,#e9c98d 22%,#fff3d0 32%,#e9c98d 42%,#c9a66b 60%,#e2bf80 80%,#b8894a 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:oro-titulo 4s linear infinite;
+  }
+  .frase-arrow{
+    position:absolute;left:50%;bottom:-26px;margin-left:-26px;z-index:4;
+    width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 35% 30%,#f6dfa6 0%,#d8b067 45%,#b08040 100%);
+    box-shadow:0 0 26px rgba(201,166,107,0.45), 0 6px 16px rgba(0,0,0,0.45);
+    animation:flecha 1.8s ease-in-out infinite;
+  }
+  .frase-arrow svg{width:24px;height:24px;fill:none;stroke:#fffaf0;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+  @keyframes flecha{0%,100%{transform:translateY(0);}50%{transform:translateY(10px);}}
+  @media (max-width:560px){
+    .frase-section{padding:48px 0 70px;}
+    .frase-box{padding:16px 16px;}
+    .frase-box .frase-gold::before{right:-17px;top:-17px;}
+    .frase-box .frase-gold::after{left:-17px;bottom:-17px;}
+  }
+  @media (prefers-reduced-motion:reduce){.frase-arrow,.frase-gold{animation:none;}}
+
+
+  /* ===== Sección "Este encuentro es para vos si…" ===== */
+  .para-vos{
+    position:relative;z-index:2;padding:70px 0 84px;
+    background:
+      radial-gradient(ellipse at 50% 0%,rgba(201,166,107,0.08) 0%,rgba(0,0,0,0) 55%),
+      linear-gradient(90deg,rgba(201,166,107,0.38) 0%,rgba(201,166,107,0.12) 10%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 76%,rgba(201,166,107,0.12) 90%,rgba(201,166,107,0.38) 100%),
+      #000;
+    border-top:1px solid rgba(201,166,107,0.35);
+    border-bottom:1px solid rgba(201,166,107,0.35);
+    box-shadow:0 -20px 50px rgba(0,0,0,0.6), 0 20px 50px rgba(0,0,0,0.6);
+  }
+  .para-vos .pv-card{background:linear-gradient(160deg,#1c1813,#0b0a09);}
+  @media (max-width:700px){.para-vos{padding:48px 0 60px;
+    background:linear-gradient(90deg,rgba(201,166,107,0.28) 0%,rgba(0,0,0,0) 9%,rgba(0,0,0,0) 91%,rgba(201,166,107,0.28) 100%),#000;}}
+  .para-vos .wrap{max-width:1000px;}
+  .pv-title{
+    text-align:center;font-family:'Poppins',sans-serif;font-weight:300;
+    font-size:clamp(26px,3.4vw,40px);color:#f5efe4;margin-bottom:36px;letter-spacing:-0.01em;text-wrap:balance;
+  }
+  .pv-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--dorado);font-size:1.12em;}
+  .pv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+  .pv-card{
+    position:relative;overflow:hidden;
+    display:flex;gap:18px;align-items:flex-start;
+    padding:26px 24px;border-radius:18px;
+    background:linear-gradient(160deg,rgba(28,24,20,0.9),rgba(8,8,8,0.9));
+    border:1px solid rgba(201,166,107,0.28);
+    box-shadow:0 14px 34px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,240,210,0.05);
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .pv-card:hover{border-color:rgba(201,166,107,0.6);transform:translateY(-3px);}
+  .pv-icon{
+    flex:0 0 auto;width:56px;height:56px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(201,166,107,0.55);
+    background:radial-gradient(circle at 35% 30%,rgba(201,166,107,0.22),rgba(0,0,0,0) 70%);
+    box-shadow:0 0 18px rgba(201,166,107,0.18);
+  }
+  .pv-icon svg{width:28px;height:28px;fill:none;stroke:#e2c285;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .pv-label{font-family:'Cinzel',serif;font-weight:700;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dorado);margin-bottom:6px;}
+  .pv-card p{font-size:16px;line-height:1.6;color:#efe6d6;margin:0;}
+
+  /* animación de entrada (solo si hay JS) */
+  .js-anim .pv-card{opacity:0;transform:translateY(26px);}
+  .js-anim .pv-card.in{
+    opacity:1;transform:none;
+    transition:opacity .7s ease calc(var(--i) * .18s), transform .7s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .18s), border-color .3s ease;
+  }
+  .js-anim .pv-card .pv-icon svg *{stroke-dasharray:1;stroke-dashoffset:1;}
+  .js-anim .pv-card.in .pv-icon svg *{animation:trazo 1.4s ease forwards calc(var(--i) * .18s + .35s);}
+  @keyframes trazo{to{stroke-dashoffset:0;}}
+
+  /* brillo que recorre las tarjetas en orden */
+  .pv-card::after{
+    content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;
+    background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,236,190,0.16) 50%,rgba(255,255,255,0) 100%);
+    transform:skewX(-20deg);pointer-events:none;
+  }
+  .pv-card.in::after{animation:pv-brillo 6s ease-in-out infinite calc(var(--i) * .45s + 2s);}
+  @keyframes pv-brillo{0%{left:-60%;}22%{left:130%;}100%{left:130%;}}
+  .pv-card.in .pv-icon{animation:pv-glow 6s ease-in-out infinite calc(var(--i) * .45s + 2s);}
+  @keyframes pv-glow{0%,100%{box-shadow:0 0 18px rgba(201,166,107,0.18);}11%{box-shadow:0 0 28px rgba(233,201,141,0.55);}22%{box-shadow:0 0 18px rgba(201,166,107,0.18);}}
+
+  @media (max-width:700px){
+    .pv-grid{grid-template-columns:1fr;gap:14px;}
+    .pv-card{padding:20px 18px;gap:14px;}
+    .pv-icon{width:48px;height:48px;}
+    .pv-icon svg{width:24px;height:24px;}
+    .pv-card p{font-size:15px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .js-anim .pv-card{opacity:1;transform:none;}
+    .js-anim .pv-card .pv-icon svg *{stroke-dashoffset:0;animation:none !important;}
+    .pv-card::after,.pv-card .pv-icon{animation:none !important;}
+  }
+
+
+  /* ===== Franja dorada "Lo que vas a experimentar" ===== */
+  .xp{
+    position:relative;z-index:2;overflow:hidden;padding:72px 0 84px;
+    background:linear-gradient(90deg,#c29a60 0%,#d2ae72 30%,#e6c485 55%,#d8b477 75%,#c29a60 100%);
+    border-top:1px solid rgba(255,230,180,0.45);border-bottom:1px solid rgba(0,0,0,0.3);
+  }
+  .xp::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.35) 9%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 78%,rgba(0,0,0,0.35) 91%,rgba(0,0,0,0.8) 100%);
+  }
+  .xp::after{
+    content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;pointer-events:none;
+    background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,250,230,0.4) 50%,rgba(255,255,255,0) 100%);
+    transform:skewX(-20deg);animation:brillo 4s ease-in-out infinite .7s;
+  }
+  .xp .wrap{position:relative;z-index:1;max-width:1240px;}
+  .xp-title{
+    text-align:center;font-family:'Poppins',sans-serif;font-weight:400;
+    font-size:clamp(26px,3.4vw,40px);color:#1a1206;letter-spacing:-0.01em;margin-bottom:14px;text-wrap:balance;
+  }
+  .xp-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:#5a3a12;font-size:1.14em;}
+  .xp-sub{max-width:640px;margin:0 auto 40px;text-align:center;font-size:16px;line-height:1.6;color:#2b1d0a;text-wrap:balance;}
+  .xp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}
+  .xp-card{
+    position:relative;overflow:hidden;border-radius:18px;aspect-ratio:3/4;
+    background:#0b0a09;border:1px solid rgba(40,25,5,0.5);
+    box-shadow:0 18px 38px rgba(60,35,5,0.45);
+  }
+  .xp-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;transition:transform .8s ease;}
+  .xp-card:hover img{transform:scale(1.05);}
+  .xp-card::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,0.72) 58%,rgba(0,0,0,0.95) 100%);
+  }
+  .xp-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px 20px 22px;}
+  .xp-badge{
+    display:inline-block;font-family:'Cinzel',serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
+    color:#1a1206;padding:5px 11px;border-radius:6px;
+    position:absolute;top:16px;left:16px;z-index:3;
+    background:linear-gradient(135deg,#e9c98d,#c9a66b);box-shadow:0 2px 10px rgba(0,0,0,0.55);
+  }
+  .xp-card h3{
+    font-family:'Cinzel',serif;font-weight:700;font-size:19px;line-height:1.25;letter-spacing:0.01em;
+    color:#f1d9a6;margin:0 0 8px;text-wrap:balance;
+  }
+  .xp-card p{font-size:14px;line-height:1.55;color:#eee4d2;margin:0;}
+  .js-anim .xp-card{opacity:0;transform:translateY(30px);}
+  .js-anim .xp-card.in{opacity:1;transform:none;transition:opacity .8s ease calc(var(--i) * .15s), transform .8s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .15s);}
+  @media (max-width:1080px){.xp-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.xp-card{aspect-ratio:4/5;}}
+  @media (max-width:600px){
+    .xp{padding:52px 0 60px;}
+    .xp::before{background:linear-gradient(90deg,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 10%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.6) 100%);}
+    .xp-sub{font-size:15px;margin-bottom:28px;}
+    .xp-grid{grid-template-columns:1fr;gap:16px;}
+    .xp-card{aspect-ratio:1/1.05;}
+    .xp-card h3{font-size:20px;}
+    .xp-card p{font-size:15px;}
+  }
+  @media (prefers-reduced-motion:reduce){.xp::after{animation:none;display:none;}.js-anim .xp-card{opacity:1;transform:none;}}
+
+
+  /* ===== Tarjeta de pago ===== */
+  .offer{
+    position:relative;z-index:2;margin:0 !important;border-radius:0 !important;
+    padding:70px 16px 80px !important;
+    background:
+      radial-gradient(ellipse at 50% 0%,rgba(201,166,107,0.08) 0%,rgba(0,0,0,0) 55%),
+      linear-gradient(90deg,rgba(201,166,107,0.38) 0%,rgba(201,166,107,0.12) 10%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 76%,rgba(201,166,107,0.12) 90%,rgba(201,166,107,0.38) 100%),
+      #000 !important;
+    border:none !important;
+    border-top:1px solid rgba(201,166,107,0.35) !important;
+    border-bottom:1px solid rgba(201,166,107,0.35) !important;
+  }
+  .offer .pay-card{background:radial-gradient(ellipse at 50% 0%,rgba(201,166,107,0.16),rgba(0,0,0,0) 60%),linear-gradient(170deg,#211c16 0%,#0e0c0a 100%);}
+  @media (max-width:560px){.offer{padding:48px 12px 56px !important;
+    background:linear-gradient(90deg,rgba(201,166,107,0.28) 0%,rgba(0,0,0,0) 9%,rgba(0,0,0,0) 91%,rgba(201,166,107,0.28) 100%),#000 !important;}}
+  .pay-card{
+    position:relative;max-width:500px;margin:0 auto;text-align:center;
+    padding:38px 30px 34px;border-radius:26px;
+    background:radial-gradient(ellipse at 50% 0%,rgba(201,166,107,0.14),rgba(0,0,0,0) 60%),linear-gradient(170deg,#1d1914 0%,#0c0b0a 100%);
+    border:1px solid rgba(201,166,107,0.35);
+    box-shadow:0 30px 70px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,240,210,0.06);
+  }
+  .pc-corner{position:absolute;width:22px;height:22px;pointer-events:none;border-color:rgba(201,166,107,0.75);border-style:solid;border-width:0;}
+  .pc-corner.tl{top:16px;left:16px;border-top-width:1.5px;border-left-width:1.5px;border-top-left-radius:6px;}
+  .pc-corner.tr{top:16px;right:16px;border-top-width:1.5px;border-right-width:1.5px;border-top-right-radius:6px;}
+  .pc-corner.bl{bottom:16px;left:16px;border-bottom-width:1.5px;border-left-width:1.5px;border-bottom-left-radius:6px;}
+  .pc-corner.br{bottom:16px;right:16px;border-bottom-width:1.5px;border-right-width:1.5px;border-bottom-right-radius:6px;}
+  .pc-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Cinzel',serif;font-weight:700;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f1d9a6;
+    padding:8px 16px;border-radius:999px;border:1px solid rgba(201,166,107,0.55);background:rgba(0,0,0,0.4);
+  }
+  .pc-badge svg{width:15px;height:15px;fill:none;stroke:var(--dorado);stroke-width:1.7;stroke-linejoin:round;}
+  .pc-price{
+    margin-top:22px;font-family:'Cinzel',serif;font-weight:700;line-height:1;
+    font-size:clamp(54px,11vw,76px);letter-spacing:0.01em;
+    background:linear-gradient(100deg,#c9a66b 0%,#f3dca6 30%,#fff6dc 42%,#f3dca6 55%,#d5b173 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    animation:oro-titulo 4s linear infinite;
+    filter:drop-shadow(0 4px 18px rgba(201,166,107,0.25));
+  }
+  .pc-price .cur{font-size:.55em;vertical-align:.55em;margin-right:4px;}
+  .pc-price .ars{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.08em;vertical-align:2.6em;margin-left:6px;-webkit-text-fill-color:#e9d3a6;}
+  .pc-price-label{margin-top:14px;font-family:'Cinzel',serif;font-weight:600;font-size:13px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dorado);}
+  .pc-info{margin:26px 0 20px !important;max-width:none !important;border-color:rgba(201,166,107,0.4) !important;}
+  .pc-countdown{
+    border:1px solid rgba(201,166,107,0.22);border-radius:16px;padding:18px 14px;background:rgba(0,0,0,0.35);margin-bottom:24px;
+  }
+  .pc-cd-label{font-family:'Cinzel',serif;font-weight:600;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#d9cdb8;margin-bottom:10px;}
+  .pc-cd{display:flex;justify-content:center;gap:18px;}
+  .pc-cd span{display:flex;flex-direction:column;align-items:center;min-width:48px;}
+  .pc-cd b{font-family:'Cinzel',serif;font-weight:700;font-size:28px;color:#f1d9a6;line-height:1.1;font-variant-numeric:tabular-nums;}
+  .pc-cd small{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#bfae8e;margin-top:3px;}
+  .pay-card .form-block{text-align:left;}
+  .pc-btn{display:block !important;width:100%;border:none;cursor:pointer;margin-top:22px;text-align:center;padding:18px 20px !important;}
+  .pay-card #pago-block .pc-btn{margin-top:4px;}
+  .pay-card .cta-sub{margin-top:14px;}
+  @media (max-width:560px){
+    .pay-card{padding:34px 18px 28px;border-radius:22px;}
+    .pc-corner{width:16px;height:16px;}
+    .pc-corner.tl,.pc-corner.tr{top:12px;}.pc-corner.bl,.pc-corner.br{bottom:12px;}
+    .pc-corner.tl,.pc-corner.bl{left:12px;}.pc-corner.tr,.pc-corner.br{right:12px;}
+    .pc-cd{gap:10px;}
+    .pc-cd b{font-size:24px;}
+  }
+
+
+  /* ===== Recursos especiales ===== */
+  .rx{max-width:1100px;margin:80px auto 0;}
+  .rx-title{
+    text-align:center;font-family:'Poppins',sans-serif;font-weight:300;color:#f5efe4;
+    font-size:clamp(24px,3.2vw,38px);line-height:1.25;margin:0 auto 30px;max-width:900px;text-wrap:balance;
+  }
+  .rx-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--dorado);font-size:1.12em;}
+  .rx-banner{
+    position:relative;overflow:hidden;border-radius:22px;
+    background:radial-gradient(ellipse at 50% 40%,#1e1810 0%,#070605 70%);
+    border:1px solid rgba(201,166,107,0.35);
+    box-shadow:0 24px 60px rgba(0,0,0,0.6);
+    padding:28px 24px 30px;
+  }
+  .rx-art{display:block;width:100%;max-width:900px;height:auto;margin:0 auto;}
+  .rx-img{display:block;width:100%;height:auto;border-radius:14px;}
+  .rx-caption{
+    position:relative;max-width:720px;margin:14px auto 0;text-align:center;
+    font-size:17px;font-weight:500;line-height:1.55;color:#f5efe4;text-wrap:balance;
+  }
+  .rx-ribbon{
+    position:absolute;top:34px;right:-58px;z-index:3;transform:rotate(45deg);
+    width:230px;text-align:center;padding:6px 0;
+    font-family:'Cinzel',serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#1a1206;
+    background:linear-gradient(90deg,#b8894a,#f3dca6,#c9a66b);box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  }
+  .rx-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px;}
+  .rx-card{
+    position:relative;overflow:hidden;border-radius:18px;padding:1.5px;isolation:isolate;
+    background:rgba(201,166,107,0.22);
+  }
+  .rx-card::before{
+    content:"";position:absolute;left:50%;top:50%;width:160%;aspect-ratio:1/1;z-index:0;pointer-events:none;
+    transform:translate(-50%,-50%) rotate(0deg);
+    background:conic-gradient(from 0deg,rgba(255,250,230,0) 0deg,rgba(255,250,230,0) 230deg,rgba(201,166,107,0.95) 300deg,#fff6dc 345deg,rgba(255,250,230,0) 360deg);
+    animation:borde-brillo 4s linear infinite;animation-delay:calc(var(--i) * -1.33s);
+  }
+  .rx-inner{
+    position:relative;z-index:1;height:100%;border-radius:16.5px;padding:22px 22px 24px;text-align:left;
+    display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center;
+    background:linear-gradient(165deg,#1a1611 0%,#0a0908 100%);
+  }
+  .rx-ic{
+    width:48px;height:48px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(201,166,107,0.55);
+    background:radial-gradient(circle at 35% 30%,rgba(201,166,107,0.25),rgba(0,0,0,0) 70%);
+    box-shadow:0 0 18px rgba(201,166,107,0.2);
+  }
+  .rx-ic svg{width:26px;height:26px;fill:none;stroke:#e2c285;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .rx-inner h3{font-family:'Cinzel',serif;font-weight:700;font-size:18px;letter-spacing:0.04em;color:#f1d9a6;margin:0;line-height:1.2;}
+  .rx-inner p{grid-column:1 / -1;font-size:15px;line-height:1.55;color:#d9cdb8;margin:12px 0 0;}
+  .rx-cta-wrap{text-align:center;margin-top:34px;}
+  .js-anim .rx-card{opacity:0;transform:translateY(24px);}
+  .js-anim .rx-card.in{opacity:1;transform:none;transition:opacity .7s ease calc(var(--i) * .15s), transform .7s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .15s);}
+  .js-anim .rx-card .rx-ic svg *{stroke-dasharray:1;stroke-dashoffset:1;}
+  .js-anim .rx-card.in .rx-ic svg *{animation:trazo 1.4s ease forwards calc(var(--i) * .15s + .3s);}
+  @media (max-width:800px){.rx-grid{grid-template-columns:1fr;}}
+  @media (max-width:560px){
+    .rx{margin-top:56px;}
+    .rx-banner{padding:40px 10px 20px;border-radius:18px;}
+    .rx-caption{font-size:15px;padding:0 8px;}
+    .rx-ribbon{top:22px;right:-66px;font-size:9px;width:220px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .rx-card::before{animation:none;}
+    .js-anim .rx-card{opacity:1;transform:none;}
+    .js-anim .rx-card .rx-ic svg *{stroke-dashoffset:0;animation:none !important;}
+  }
+
+
+  /* ===== Ajustes: objetos realistas, botón puente, nombre del evento ===== */
+  .rx-banner{padding:34px 24px 30px;}
+  .rx-objs{display:grid;grid-template-columns:repeat(3,1fr);max-width:860px;margin:0 auto;}
+  .rx-obj{display:flex;flex-direction:column;align-items:center;padding:0 10px;position:relative;}
+  .rx-obj + .rx-obj::before{content:"";position:absolute;left:0;top:18%;bottom:8%;width:1px;background:linear-gradient(180deg,rgba(201,166,107,0),rgba(201,166,107,0.6),rgba(201,166,107,0));}
+  .rx-obj svg{width:min(190px,100%);height:auto;filter:drop-shadow(0 10px 22px rgba(0,0,0,0.6));animation:flotar 5s ease-in-out infinite;}
+  .rx-obj:nth-child(2) svg{animation-delay:-1.6s;}
+  .rx-obj:nth-child(3) svg{animation-delay:-3.2s;}
+  @keyframes flotar{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  .rx-obj span{margin-top:6px;font-family:'Cinzel',serif;font-weight:700;font-size:clamp(13px,1.8vw,20px);letter-spacing:0.06em;text-transform:uppercase;color:#f1d9a6;text-align:center;line-height:1.2;text-wrap:balance;}
+  .rx-caption{margin-top:22px;}
+  .rx-ic.rx-ic-real{width:64px;height:64px;border:none;background:none;box-shadow:none;border-radius:0;}
+  .rx-ic.rx-ic-real svg{width:64px;height:64px;stroke:none;fill:initial;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.6));}
+  .js-anim .rx-card .rx-ic-real svg *{stroke-dasharray:none;stroke-dashoffset:0;animation:none;}
+
+  .para-vos{z-index:3 !important;padding-bottom:110px !important;}
+  .pv-bridge{
+    position:absolute;left:50%;bottom:0;transform:translate(-50%,50%);z-index:5;white-space:nowrap;
+    padding:17px 44px !important;box-shadow:0 10px 30px rgba(0,0,0,0.55),0 0 24px rgba(201,166,107,0.35), inset 0 1px 0 rgba(255,250,235,0.6) !important;
+  }
+  .pv-bridge:hover{transform:translate(-50%,calc(50% - 2px));}
+  .xp{padding-top:92px !important;}
+
+  .pc-event{margin-top:22px;font-family:'Playfair Display',serif;line-height:1.05;color:#f5efe4;}
+  .pc-event .ev1{display:block;font-weight:400;font-size:clamp(26px,5.4vw,34px);letter-spacing:0.02em;}
+  .pc-event .ev-amp{display:block;font-weight:400;font-size:24px;color:#e9d3a6;margin:2px 0;}
+  .pc-event .ev2{display:block;font-style:italic;font-weight:400;font-size:clamp(24px,5vw,31px);color:#e2bf80;}
+  .pc-divider{width:62%;height:1px;margin:18px auto 4px;background:linear-gradient(90deg,rgba(201,166,107,0),rgba(201,166,107,0.8),rgba(201,166,107,0));}
+  .pc-price{margin-top:14px !important;}
+  .pc-price-label{font-size:10.5px !important;letter-spacing:0.24em !important;margin-top:10px !important;color:#bfa06a !important;}
+  @media (max-width:560px){
+    .rx-banner{padding:40px 8px 20px;}
+    .rx-obj{padding:0 4px;}
+    .rx-obj span{font-size:11px;letter-spacing:0.03em;}
+    .pv-bridge{padding:15px 30px !important;font-size:13px !important;}
+    .para-vos{padding-bottom:90px !important;}
+    .xp{padding-top:76px !important;}
+  }
+  @media (prefers-reduced-motion:reduce){.rx-obj svg{animation:none;}}
+
+
+  /* ===== Sección "Soy Rodrigo Vega" ===== */
+  .bio{
+    position:relative;z-index:2;overflow:hidden;background:#000;min-height:640px;
+    display:flex;align-items:center;
+    border-top:1px solid rgba(201,166,107,0.35);border-bottom:1px solid rgba(201,166,107,0.35);
+  }
+  .bio-img{position:absolute;top:0;right:0;height:100%;width:auto;max-width:none;z-index:0;}
+  .bio::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      linear-gradient(90deg,#000 0%,#000 28%,rgba(0,0,0,0.75) 45%,rgba(0,0,0,0) 62%),
+      linear-gradient(0deg,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 25%),
+      linear-gradient(270deg,rgba(201,166,107,0.25) 0%,rgba(201,166,107,0) 8%);
+  }
+  .bio-inner{position:relative;z-index:2;width:100%;max-width:1240px;margin:0 auto;padding:80px 40px;}
+  .bio-text{max-width:560px;}
+  .bio-title{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(32px,4.2vw,52px);color:#f5efe4;line-height:1.1;margin-bottom:24px;letter-spacing:0.01em;}
+  .bio-title span{
+    background:linear-gradient(100deg,#b8894a 0%,#e9c98d 22%,#fff3d0 32%,#e9c98d 42%,#c9a66b 60%,#e2bf80 80%,#b8894a 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    animation:oro-titulo 4s linear infinite;
+  }
+  .bio-text p{font-size:16px;line-height:1.7;color:#e9e1d2;margin:0 0 16px;}
+  .bio-text b{color:#f1d9a6;font-weight:600;}
+  .bio-text em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:1.15em;color:#e2bf80;}
+  .bio-text em,.bio-ev{line-height:1;}
+  @media (max-width:1250px) and (min-width:901px){.bio-img{right:-22%;}}
+  .bio-ev{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:1.15em;color:#e2bf80;}
+  .bio-sign{
+    margin-top:24px !important;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;
+    font-size:26px !important;color:var(--dorado) !important;
+  }
+  .bio-sign::before{content:"";display:inline-block;width:40px;height:1px;background:var(--dorado);vertical-align:middle;margin-right:14px;}
+  @media (max-width:900px){
+    .bio{display:block;min-height:0;}
+    .bio-img{position:relative;display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:88% 30%;}
+    .bio::before{
+      top:0;bottom:auto;height:calc(100vw * 1.25);
+      background:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.6) 18%,rgba(0,0,0,0) 45%);
+    }
+    .bio-inner{margin-top:-90px;padding:0 22px 56px;}
+    .bio-text{max-width:none;}
+    .bio-text p{font-size:15px;}
+  }
+
+
+  /* ===== Luz dorada detrás de la tarjeta de fecha/hora ===== */
+  .pc-info{position:relative;isolation:isolate;overflow:visible !important;}
+  .pc-info::before{
+    content:"";position:absolute;left:50%;top:50%;width:150%;aspect-ratio:1/1;z-index:-1;pointer-events:none;
+    transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle,rgba(240,208,150,0.55) 0%,rgba(215,176,110,0.28) 30%,rgba(201,166,107,0.08) 50%,rgba(201,166,107,0) 64%);
+    animation:halo 5s ease-in-out infinite;
+  }
+  @keyframes halo{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(.96);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.04);}}
+  .pay-card{overflow:visible;}
+  .pc-info{background:linear-gradient(160deg,rgba(28,24,20,0.96),rgba(8,8,8,0.96)) !important;}
+
+  /* ===== Pie de página ===== */
+  footer.foot{
+    position:relative;z-index:2;overflow:hidden;text-align:center;
+    padding:56px 24px 40px;background:#000;
+    border-top:1px solid rgba(201,166,107,0.45);
+  }
+  footer.foot::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse at 50% 0%,rgba(201,166,107,0.14) 0%,rgba(0,0,0,0) 60%),
+      linear-gradient(90deg,rgba(201,166,107,0.35) 0%,rgba(201,166,107,0) 16%,rgba(201,166,107,0) 84%,rgba(201,166,107,0.35) 100%);
+  }
+  footer.foot::after{
+    content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;pointer-events:none;
+    background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,244,214,0.16) 50%,rgba(255,255,255,0) 100%);
+    transform:skewX(-20deg);animation:brillo 4s ease-in-out infinite;
+  }
+  footer.foot > *{position:relative;z-index:1;}
+  .foot-logo{display:block;width:min(320px,72%);height:auto;margin:0 auto 10px;}
+  .foot-ev{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,26px);color:#f5efe4;margin-top:6px;}
+  .foot-ev em{font-style:italic;color:#e2bf80;}
+  .foot-date{margin-top:10px;font-family:'Cinzel',serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dorado);}
+  .foot-copy{margin-top:26px;padding-top:18px;border-top:1px solid rgba(201,166,107,0.18);max-width:520px;margin-left:auto;margin-right:auto;font-size:12px;color:#8c7c5f;}
+  .foot-date span{white-space:nowrap;}
+  @media (max-width:560px){.foot-date{font-size:10.5px;letter-spacing:0.1em;line-height:1.7;}.foot-ev em{white-space:nowrap;}}
+  @media (prefers-reduced-motion:reduce){footer.foot::after,.pc-info::before{animation:none;}}
+
+
+  /* ===== Bio centrada + sombreado dorado lateral ===== */
+  .bio{display:block !important;background:
+      linear-gradient(90deg,rgba(201,166,107,0.38) 0%,rgba(201,166,107,0.12) 8%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 80%,rgba(201,166,107,0.12) 92%,rgba(201,166,107,0.38) 100%),#000 !important;}
+  .bio::before{display:none;}
+  .bio-stage{position:relative;max-width:1200px;margin:0 auto;min-height:640px;display:flex;align-items:center;overflow:hidden;}
+  .bio-stage .bio-img{position:absolute;top:0;right:0;height:100%;width:auto;}
+  .bio-stage::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      linear-gradient(90deg,#000 0%,#000 30%,rgba(0,0,0,0.8) 44%,rgba(0,0,0,0) 60%),
+      linear-gradient(270deg,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0) 10%),
+      linear-gradient(0deg,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 25%);
+  }
+  .bio-stage .bio-inner{padding:80px 40px;}
+  @media (max-width:1250px) and (min-width:901px){.bio-stage .bio-img{right:-18%;}}
+  @media (max-width:900px){
+    .bio{background:linear-gradient(90deg,rgba(201,166,107,0.28) 0%,rgba(0,0,0,0) 9%,rgba(0,0,0,0) 91%,rgba(201,166,107,0.28) 100%),#000 !important;}
+    .bio-stage{display:block;min-height:0;}
+    .bio-stage .bio-img{position:relative;width:100%;height:auto;right:auto;-webkit-mask:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);mask:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);}
+    .bio-stage::before{top:0;bottom:auto;height:calc(100vw * 1.25);background:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.6) 18%,rgba(0,0,0,0) 45%);}
+    .bio-stage .bio-inner{padding:0 22px 56px;}
+  }
+
+  /* ===== Luz que gira alrededor de la tarjeta de fecha/hora ===== */
+  @property --giro{syntax:'<angle>';initial-value:0deg;inherits:false;}
+  .pc-info::after{
+    content:"";position:absolute;inset:-1px;border-radius:inherit;padding:2px;pointer-events:none;z-index:2;
+    background:conic-gradient(from var(--giro),rgba(255,250,230,0) 0deg,rgba(255,250,230,0) 230deg,rgba(201,166,107,0.9) 300deg,#fff6dc 345deg,rgba(255,250,230,0) 360deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    animation:giro-borde 4s linear infinite;
+  }
+  @keyframes giro-borde{to{--giro:360deg;}}
+  @media (prefers-reduced-motion:reduce){.pc-info::after{animation:none;}}
+
+
+  /* ===== Selector de país ===== */
+  .select-wrap{position:relative;}
+  .select-wrap::after{content:"";position:absolute;right:16px;top:50%;width:8px;height:8px;margin-top:-6px;border-right:1.5px solid var(--dorado);border-bottom:1.5px solid var(--dorado);transform:rotate(45deg);pointer-events:none;}
+  .form-block select{
+    width:100%;appearance:none;-webkit-appearance:none;cursor:pointer;
+    background:rgba(244,217,172,0.06);border:1px solid rgba(244,217,172,0.25);border-radius:8px;
+    padding:12px 40px 12px 14px;font-size:15px;color:var(--crema);font-family:'Poppins',sans-serif;
+  }
+  .form-block select:invalid{color:#8a7a5c;}
+  .form-block select:focus{outline:none;border-color:var(--dorado);}
+  .form-block select option{background:#14110d;color:#f1e7d4;}
+  .form-block input:focus,.form-block select:focus{box-shadow:0 0 0 3px rgba(201,166,107,0.18);}
+
+
+  /* ===== 3 herramientas ===== */
+  .xp-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;max-width:1080px;margin:0 auto;}
+  @media (max-width:1080px){.xp-card{aspect-ratio:3/4 !important;}}
+  @media (max-width:760px){.xp-grid{grid-template-columns:1fr !important;max-width:460px;}.xp-card{aspect-ratio:1/1.05 !important;}}
+
+
+  /* ===== Qué es un bloqueo energético ===== */
+  .frase-kicker{font-family:'Cinzel',serif;font-weight:700;font-size:14px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dorado);margin-bottom:12px;}
+  .bloqueo-list{list-style:none;padding:0;margin:0 auto 22px;max-width:640px;display:grid;gap:10px;text-align:left;}
+  .bloqueo-list li{
+    position:relative;padding:13px 18px 13px 44px;border-radius:12px;
+    background:rgba(0,0,0,0.55);border:1px solid rgba(201,166,107,0.28);
+    font-size:16px;line-height:1.5;color:#f1e7d4;backdrop-filter:blur(2px);
+  }
+  .bloqueo-list li::before{content:"";position:absolute;left:18px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--dorado);box-shadow:0 0 10px rgba(233,201,141,0.7);}
+  .bloqueo-note{font-size:17px;color:#f5efe4;margin:0 auto 26px;max-width:640px;font-style:italic;}
+  @media (max-width:560px){.bloqueo-list li{font-size:15px;padding:12px 14px 12px 38px;}.bloqueo-list li::before{left:15px;}.bloqueo-note{font-size:15px;}}
+
+  /* video — ahora va primero */
+  .video-section{padding:32px 0 8px;}
+  .video-frame{
+    position:relative;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(201,166,107,0.4);
+    background:#000;
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  }
+  video{display:block;width:100%;height:auto;background:#000;}
+  .video-fallback{
+    display:block;
+    text-align:center;
+    font-size:13px;
+    color:#c2ab84;
+    margin-top:10px;
+  }
+  .video-fallback a{color:var(--dorado);text-decoration:underline;}
+
+  /* hero — título en una línea + párrafo */
+  .hero{
+    padding:32px 0 28px;
+    text-align:center;
+  }
+  .kicker{
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--dorado);
+    font-weight:600;
+    margin-bottom:12px;
+  }
+  h1.display{
+    font-size:clamp(20px,4vw,42px);
+    text-align:center;
+    margin:0 auto 14px;
+    max-width:680px;
+  }
+  .hero p.lead{
+    font-family:'Poppins',sans-serif;
+    font-size:16px;
+    color:var(--crema);
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  /* cuenta regresiva */
+  .countdown-section{padding:28px 0 8px;text-align:center;}
+  .countdown-caption{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:#c2ab84;
+    margin-bottom:14px;
+  }
+  .countdown-caption b{color:var(--dorado);}
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .countdown .unit{
+    background:rgba(201,166,107,0.08);
+    border:1px solid rgba(201,166,107,0.35);
+    border-radius:12px;
+    min-width:72px;
+    padding:14px 10px;
+  }
+  .countdown .num{
+    font-family:'Playfair Display',serif;
+    font-weight:800;
+    font-size:30px;
+    color:var(--dorado);
+    line-height:1;
+  }
+  .countdown .unit-label{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:#c2ab84;
+    margin-top:6px;
+  }
+
+  /* formulario de registro */
+  .form-block label{
+    display:block;
+    text-align:left;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:#c2ab84;
+    margin:14px 0 6px;
+  }
+  .form-block label:first-of-type{margin-top:0;}
+  .form-block input{
+    width:100%;
+    background:rgba(244,217,172,0.06);
+    border:1px solid rgba(244,217,172,0.25);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:15px;
+    color:var(--crema);
+    font-family:'Poppins',sans-serif;
+  }
+  .form-block input::placeholder{color:#8a7a5c;}
+  .form-block input:focus{outline:none;border-color:var(--dorado);}
+  .form-msg{
+    margin-top:14px;
+    font-size:13px;
+    display:none;
+  }
+  .form-msg.error{color:#e08a8a;display:block;}
+  .cta-btn[disabled]{opacity:0.6;cursor:not-allowed;}
+
+  /* precio / CTA */
+  .offer{
+    background:var(--bordo-2);
+    border:1px solid rgba(201,166,107,0.3);
+    border-radius:16px;
+    padding:32px 24px;
+    text-align:center;
+    margin:36px 0;
+  }
+  .price{
+    font-family:'Playfair Display',serif;
+    font-weight:800;
+    font-size:50px;
+    color:var(--dorado);
+    line-height:1;
+  }
+  .price small{
+    display:block;
+    font-family:'Poppins',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    color:#c2ab84;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    margin-top:6px;
+  }
+  .refund-note{
+    margin:18px auto 26px;
+    max-width:420px;
+    font-size:14px;
+    color:var(--crema);
+    background:rgba(201,166,107,0.09);
+    border:1px dashed rgba(201,166,107,0.4);
+    border-radius:10px;
+    padding:14px 16px;
+  }
+  .refund-note b{color:var(--dorado);}
+  .cta-btn{
+    display:inline-block;
+    background:var(--dorado);
+    color:var(--bordo);
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    text-decoration:none;
+    padding:16px 36px;
+    border-radius:999px;
+    letter-spacing:0.02em;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 10px 24px rgba(201,166,107,0.25);
+  }
+  .cta-btn:hover{transform:translateY(-2px);}
+  .cta-sub{
+    margin-top:12px;
+    font-size:12px;
+    color:#c2ab84;
+  }
+
+  /* incluye */
+  .includes{padding:20px 0 8px;}
+  .includes h2{font-size:28px;text-align:center;margin-bottom:22px;}
+  .includes ul{list-style:none;display:grid;gap:12px;}
+  .includes li{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    font-size:15px;
+    color:var(--crema);
+    background:rgba(244,217,172,0.04);
+    border:1px solid rgba(244,217,172,0.1);
+    border-radius:10px;
+    padding:14px 16px;
+  }
+  .includes li .dot{
+    flex:none;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--dorado);
+    margin-top:6px;
+  }
+
+  /* FAQ */
+  .faq{padding:36px 0;}
+  .faq h2{font-size:28px;text-align:center;margin-bottom:20px;}
+  details{
+    border-bottom:1px solid rgba(244,217,172,0.15);
+    padding:16px 0;
+  }
+  summary{
+    cursor:pointer;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--crema);
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:'+';
+    color:var(--dorado);
+    font-size:20px;
+    margin-left:12px;
+  }
+  details[open] summary::after{content:'–';}
+  details p{
+    margin-top:10px;
+    font-size:14px;
+    color:#c2ab84;
+  }
+
+  footer{
+    text-align:center;
+    padding:36px 24px 48px;
+    font-size:13px;
+    color:#9c8862;
+  }
+  footer .closing{
+    font-family:'Playfair Display',serif;
+    font-weight:800;
+    font-size:20px;
+    color:var(--dorado);
+    letter-spacing:0.02em;
+    margin-bottom:10px;
+  }
+
+  /* pantalla de gracias */
+  #gracias{
+    display:none;
+    min-height:100vh;
+    align-items:center;
+    justify-content:center;
+    padding:40px 24px;
+    text-align:center;
+  }
+  #gracias .card{max-width:460px;}
+  #gracias .check{
+    width:64px;height:64px;
+    border-radius:50%;
+    background:rgba(201,166,107,0.15);
+    border:1px solid var(--dorado);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 20px;
+    font-size:30px;
+    color:var(--dorado);
+  }
+  #gracias h1{font-size:clamp(28px,7vw,40px);margin-bottom:14px;white-space:normal;}
+  #gracias p.lead{color:var(--crema);font-size:15px;margin-bottom:28px;}
+  .wa-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:#25D366;
+    color:#0b1a10;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    text-decoration:none;
+    padding:16px 32px;
+    border-radius:999px;
+    box-shadow:0 10px 24px rgba(37,211,102,0.25);
+  }
+  #gracias .cta-sub{margin-top:14px;}
+
+  body.show-gracias .principal{display:none;}
+  body.show-gracias #gracias{display:flex;}
+
+  @media (max-width:480px){
+    .price{font-size:36px;}
+    .countdown .unit{min-width:62px;padding:12px 8px;}
+    .countdown .num{font-size:24px;}
+  }
+  @media (max-width:380px){
+    h1.display{font-size:clamp(17px,5vw,22px);}
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<defs>
+  <linearGradient id="oGoldL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2c8"/><stop offset=".45" stop-color="#e2bd78"/><stop offset="1" stop-color="#9c7031"/></linearGradient>
+  <linearGradient id="oGoldD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9b06a"/><stop offset=".6" stop-color="#a47632"/><stop offset="1" stop-color="#6e4b1a"/></linearGradient>
+  <linearGradient id="oLeather" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a342d"/><stop offset=".5" stop-color="#1c1915"/><stop offset="1" stop-color="#0b0a09"/></linearGradient>
+  <linearGradient id="oSpine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0a0908"/><stop offset=".5" stop-color="#2d2822"/><stop offset="1" stop-color="#0d0c0a"/></linearGradient>
+  <linearGradient id="oPages" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#efe3c6"/><stop offset="1" stop-color="#b9a684"/></linearGradient>
+  <linearGradient id="oGloss" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="oBoxF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34302b"/><stop offset=".5" stop-color="#1a1815"/><stop offset="1" stop-color="#0a0908"/></linearGradient>
+  <linearGradient id="oBoxS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#121110"/><stop offset="1" stop-color="#050505"/></linearGradient>
+  <linearGradient id="oBoxT" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#45403a"/><stop offset="1" stop-color="#26231f"/></linearGradient>
+  <linearGradient id="oRibbonV" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a47632"/><stop offset=".45" stop-color="#f6dea4"/><stop offset="1" stop-color="#b8894a"/></linearGradient>
+  <linearGradient id="oRibbonS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a6330"/><stop offset=".5" stop-color="#c9a066"/><stop offset="1" stop-color="#6e4b1a"/></linearGradient>
+  <radialGradient id="oGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e9c98d" stop-opacity=".35"/><stop offset="1" stop-color="#e9c98d" stop-opacity="0"/></radialGradient>
+</defs>
+<symbol id="obj-book" viewBox="0 0 200 200">
+  <ellipse cx="104" cy="188" rx="66" ry="7" fill="#000" opacity=".6"/>
+  <polygon points="144,30 158,40 158,184 144,176" fill="url(#oPages)"/>
+  <g stroke="#b9a785" stroke-width=".5" opacity=".6"><path d="M145 40 L157 49"/><path d="M145 49 L157 58"/><path d="M145 58 L157 67"/><path d="M145 67 L157 76"/><path d="M145 76 L157 85"/><path d="M145 85 L157 94"/><path d="M145 94 L157 103"/><path d="M145 103 L157 112"/><path d="M145 112 L157 121"/><path d="M145 121 L157 130"/><path d="M145 130 L157 139"/><path d="M145 139 L157 148"/><path d="M145 148 L157 157"/><path d="M145 157 L157 166"/><path d="M145 166 L157 175"/></g>
+  <polygon points="48,176 144,176 158,184 62,186" fill="#d9c9a4"/>
+  <rect x="44" y="20" width="100" height="158" rx="5" fill="url(#oLeather)" stroke="#3a322a" stroke-width="1"/>
+  <rect x="36" y="22" width="14" height="156" rx="4" fill="url(#oSpine)"/>
+  <path d="M49 26v148" stroke="#000" stroke-opacity=".6" stroke-width="2"/>
+  <rect x="54" y="30" width="82" height="140" rx="3" fill="none" stroke="url(#oGoldL)" stroke-width="1.2" opacity=".75"/>
+  <circle cx="95" cy="98" r="33" fill="none" stroke="url(#oGoldL)" stroke-width="2.4"/>
+  <circle cx="95" cy="98" r="26" fill="none" stroke="url(#oGoldD)" stroke-width="1"/>
+  <polygon points="95,98 90.0,98.0 95.0,67.0" fill="url(#oGoldL)"/><polygon points="95,98 95.0,67.0 100.0,98.0" fill="url(#oGoldD)"/><polygon points="95,98 91.5,94.5 108.4,84.6" fill="url(#oGoldL)"/><polygon points="95,98 108.4,84.6 98.5,101.5" fill="url(#oGoldD)"/><polygon points="95,98 95.0,93.0 126.0,98.0" fill="url(#oGoldL)"/><polygon points="95,98 126.0,98.0 95.0,103.0" fill="url(#oGoldD)"/><polygon points="95,98 98.5,94.5 108.4,111.4" fill="url(#oGoldL)"/><polygon points="95,98 108.4,111.4 91.5,101.5" fill="url(#oGoldD)"/><polygon points="95,98 100.0,98.0 95.0,129.0" fill="url(#oGoldL)"/><polygon points="95,98 95.0,129.0 90.0,98.0" fill="url(#oGoldD)"/><polygon points="95,98 98.5,101.5 81.6,111.4" fill="url(#oGoldL)"/><polygon points="95,98 81.6,111.4 91.5,94.5" fill="url(#oGoldD)"/><polygon points="95,98 95.0,103.0 64.0,98.0" fill="url(#oGoldL)"/><polygon points="95,98 64.0,98.0 95.0,93.0" fill="url(#oGoldD)"/><polygon points="95,98 91.5,101.5 81.6,84.6" fill="url(#oGoldL)"/><polygon points="95,98 81.6,84.6 98.5,94.5" fill="url(#oGoldD)"/>
+  <circle cx="95" cy="98" r="3.5" fill="#fff0c4"/>
+  <g fill="url(#oGoldL)"><path d="M44 30v-5a5 5 0 0 1 5-5h7v4h-6a2 2 0 0 0-2 2v4z"/><path d="M144 30v-5a5 5 0 0 0-5-5h-7v4h6a2 2 0 0 1 2 2v4z"/><path d="M44 168v5a5 5 0 0 0 5 5h7v-4h-6a2 2 0 0 1-2-2v-4z"/><path d="M144 168v5a5 5 0 0 1-5 5h-7v-4h6a2 2 0 0 0 2-2v-4z"/></g>
+  <rect x="44" y="20" width="100" height="158" rx="5" fill="url(#oGloss)"/>
+</symbol><symbol id="obj-star" viewBox="0 0 200 200">
+  <ellipse cx="100" cy="186" rx="58" ry="7" fill="#000" opacity=".55"/>
+  <circle cx="100" cy="104" r="78" fill="url(#oGlow)"/>
+  <g><polygon points="100,106 78.8,76.9 100.0,24.0" fill="#f4e0af"/><polygon points="100,106 100.0,24.0 121.2,76.9" fill="#d6b374"/><polygon points="100,106 121.2,76.9 178.0,80.7" fill="#b78f4d"/><polygon points="100,106 178.0,80.7 134.2,117.1" fill="#7f5824"/><polygon points="100,106 134.2,117.1 148.2,172.3" fill="#7c5622"/><polygon points="100,106 148.2,172.3 100.0,142.0" fill="#6e4818"/><polygon points="100,106 100.0,142.0 51.8,172.3" fill="#b28a49"/><polygon points="100,106 51.8,172.3 65.8,117.1" fill="#b38b4a"/><polygon points="100,106 65.8,117.1 22.0,80.7" fill="#f2ddab"/><polygon points="100,106 22.0,80.7 78.8,76.9" fill="#e9d09a"/></g>
+  <polygon points="100.0,24.0 121.2,76.9 178.0,80.7 134.2,117.1 148.2,172.3 100.0,142.0 51.8,172.3 65.8,117.1 22.0,80.7 78.8,76.9" fill="none" stroke="#fff3cf" stroke-opacity=".55" stroke-width="1"/>
+  <circle cx="100" cy="106" r="3" fill="#fff6dc" opacity=".8"/>
+  <path d="M68 44l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#fff6dc" opacity=".85"/>
+</symbol><symbol id="obj-gift" viewBox="0 0 200 200"><ellipse cx="104" cy="186" rx="72" ry="8" fill="#000" opacity=".6"/><polygon points="40.0,102.0 120.0,102.0 120.0,178.0 40.0,178.0" fill="url(#oBoxF)" stroke="#3d3730" stroke-width=".8"/><polygon points="120.0,102.0 161.8,86.8 161.8,162.8 120.0,178.0" fill="url(#oBoxS)" stroke="#2a2520" stroke-width=".8"/><polygon points="73.0,102.0 87.0,102.0 87.0,178.0 73.0,178.0" fill="url(#oRibbonV)" /><polygon points="138.5,95.3 145.5,92.7 145.5,168.7 138.5,171.3" fill="url(#oRibbonS)" /><polygon points="34.0,80.0 126.0,80.0 126.0,102.0 34.0,102.0" fill="url(#oBoxF)" stroke="#2c2620" stroke-width=".8"/><polygon points="126.0,80.0 170.0,64.0 170.0,86.0 126.0,102.0" fill="url(#oBoxS)" /><polygon points="34.0,80.0 78.0,64.0 170.0,64.0 126.0,80.0" fill="url(#oBoxT)" /><polygon points="73.1,80.0 86.9,80.0 86.9,102.0 73.1,102.0" fill="url(#oRibbonV)" /><polygon points="144.5,73.3 151.5,70.7 151.5,92.7 144.5,95.3" fill="url(#oRibbonS)" /><polygon points="73.1,80.0 117.1,64.0 130.9,64.0 86.9,80.0" fill="url(#oGoldL)" /><polygon points="52.5,73.3 144.5,73.3 151.5,70.7 59.5,70.7" fill="url(#oGoldL)" /><g transform="translate(102.0,72.0)">
+  <path d="M0 0 C-14 -26,-44 -26,-40 -8 C-37 4,-14 4,0 0Z" fill="url(#oGoldL)" stroke="#8a6330" stroke-width=".8"/>
+  <path d="M0 0 C14 -28,46 -24,40 -6 C36 6,14 4,0 0Z" fill="url(#oGoldD)" stroke="#8a6330" stroke-width=".8"/>
+  <path d="M-4 -2 C-12 -14,-30 -16,-32 -8" fill="none" stroke="#fff3cf" stroke-opacity=".7" stroke-width="1.2"/>
+  <path d="M-2 2 L-16 22 L-8 20 L-4 26 Z" fill="url(#oGoldD)"/>
+  <path d="M2 2 L18 20 L10 19 L7 25 Z" fill="url(#oGoldL)"/>
+  <ellipse cx="0" cy="0" rx="7" ry="6" fill="url(#oGoldL)" stroke="#8a6330" stroke-width=".8"/>
+</g></symbol></svg>
+
+<div class="bg-layer"></div>
+<div class="bg-overlay"></div>
+
+<div class="principal">
+
+  <a class="bar" href="#reserva" style="text-decoration:none;">
+    <span class="bar-text"><span class="nw">Cupos limitados<span class="sep">-</span>Jueves 22 de octubre</span><span class="sep sep-mid">-</span><span class="nw">19:30 hs Argentina / Uruguay</span></span>
+  </a>
+
+  <a class="top-cd" href="#reserva" aria-label="Tiempo restante hasta el evento">
+    <div class="tcd-u"><div class="tcd-n" id="bcd-days">00</div><div class="tcd-l">Días</div></div>
+    <div class="tcd-u"><div class="tcd-n" id="bcd-hours">00</div><div class="tcd-l">Horas</div></div>
+    <div class="tcd-u"><div class="tcd-n" id="bcd-minutes">00</div><div class="tcd-l">Min</div></div>
+    <div class="tcd-u"><div class="tcd-n" id="bcd-seconds">00</div><div class="tcd-l">Seg</div></div>
+  </a>
+
+  <div class="hero-split">
+  <section class="video-section">
+    <div class="wrap">
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" poster="IMGPLACEHOLDER">
+          <source src="https://www.dropbox.com/scl/fi/ck1semwipb2jqb8w0pkht/VIDEO-PARA-LANDING.mp4?rlkey=7qh6q5qmm4f1ugbn4bgzq8kho&amp;raw=1" type="video/mp4">
+          Tu navegador no puede reproducir el video.
+        </video>
+      </div>
+      <span class="video-fallback">¿No carga el video? <a href="https://www.dropbox.com/scl/fi/ck1semwipb2jqb8w0pkht/VIDEO-PARA-LANDING.mp4?rlkey=7qh6q5qmm4f1ugbn4bgzq8kho&amp;dl=0" target="_blank" rel="noopener">Miralo acá</a></span>
+    </div>
+  </section>
+
+  <section class="hero hero2">
+    <div class="wrap">
+      <div class="h2-badge"><span class="dot"></span>Evento online en vivo · por YouTube</div>
+      <h1 class="h2-title">
+        <span class="h2-light">Cambian las personas, pero en el amor se repite la misma historia.</span>
+        <span class="h2-gold">Ahora es momento de activar el cambio.</span>
+      </h1>
+      <p class="h2-sub">En este evento online en vivo, Rodrigo te ayuda a identificar el bloqueo energético que te hace repetir lo mismo en tus vínculos, y te llevás un plan concreto para empezar a destrabarlo.</p>
+
+      <div class="h2-card">
+        <div class="h2-chips">
+          <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Jueves 22 de octubre</span>
+          <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.2"/><path d="M8.2 8.2a5.4 5.4 0 0 0 0 7.6M15.8 8.2a5.4 5.4 0 0 1 0 7.6M5.3 5.3a9.5 9.5 0 0 0 0 13.4M18.7 5.3a9.5 9.5 0 0 1 0 13.4"/></svg>En vivo por YouTube · 90 min</span>
+          <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/></svg>Activación energética</span>
+        </div>
+        <div class="h2-time">
+          <span class="orb"></span>
+          <div>
+            <div class="t-label">Horario de referencia</div>
+            <div class="t-value">19:30 hs</div>
+            <div class="t-sub">Argentina · Uruguay</div>
+          </div>
+        </div>
+      </div>
+
+      <a class="h2-cta" href="#reserva">Reservar mi lugar</a>
+      <div class="h2-price">Inversión: <b>$24.990</b></div>
+    </div>
+  </section>
+  </div>
+
+  <section class="frase-section">
+    <div class="wrap">
+      <p class="frase-kicker">¿Qué es un bloqueo energético?</p>
+      <p class="frase-light">No se ve, pero se siente. Quizás te pasa esto:</p>
+      <ul class="bloqueo-list">
+        <li>Das todo en una relación y sentís que nunca alcanza.</li>
+        <li>Atraés una y otra vez el mismo tipo de persona.</li>
+        <li>Te cuesta soltar a alguien, aunque sabés que no te hace bien.</li>
+        <li>Cuando algo empieza bien, aparece algo que lo frena.</li>
+        <li>Sentís un cansancio en el pecho o en el cuerpo que no se va con descansar.</li>
+      </ul>
+      <p class="bloqueo-note">Eso es energía que quedó trabada y se repite en tus vínculos.</p>
+      <div class="frase-box">
+        <span class="frase-gold">Encontrar tu punto de quiebre es el primer paso para destrabarla.</span>
+      </div>
+    </div>
+    <a class="frase-arrow" href="#para-vos" aria-label="Seguir bajando">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13M6 12l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <section class="para-vos" id="para-vos">
+    <div class="wrap">
+      <h2 class="pv-title">Este evento es para vos <em>si…</em></h2>
+      <div class="pv-grid">
+        <div class="pv-card" style="--i:0">
+          <div class="pv-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M4 12a8 8 0 0 1 13.66-5.66L20 8"/><path pathLength="1" d="M20 4v4h-4"/><path pathLength="1" d="M20 12a8 8 0 0 1-13.66 5.66L4 16"/><path pathLength="1" d="M4 20v-4h4"/></svg></div>
+          <div><div class="pv-label">El patrón</div><p>Cambian las personas, pero en tus relaciones siempre terminás viviendo la misma historia.</p></div>
+        </div>
+        <div class="pv-card" style="--i:1">
+          <div class="pv-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M12 12c0-.8.7-1.5 1.5-1.5S15 11.2 15 12.5 13.7 15 12 15s-4-1.5-4-4 2-5 5-5 6 2.3 6 6-3 8-7.5 8S3 17 3 12"/></svg></div>
+          <div><div class="pv-label">El apego</div><p>Seguís pensando en alguien o en una relación que ya terminó y querés, por fin, poder soltar.</p></div>
+        </div>
+        <div class="pv-card" style="--i:2">
+          <div class="pv-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M2.5 13s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle pathLength="1" cx="12" cy="13" r="2.6"/><path pathLength="1" d="M12 2.5v2.2M5.2 4.6l1.4 1.6M18.8 4.6l-1.4 1.6"/></svg></div>
+          <div><div class="pv-label">El desgaste</div><p>Das todo en el amor, no recibís lo mismo y querés entender qué energía se está trabando.</p></div>
+        </div>
+        <div class="pv-card" style="--i:3">
+          <div class="pv-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect pathLength="1" x="5" y="11" width="14" height="10" rx="2"/><path pathLength="1" d="M8 11V7.5a4 4 0 0 1 7.7-1.6"/><path pathLength="1" d="M12 15v2.5"/></svg></div>
+          <div><div class="pv-label">El momento</div><p>Sentís que llegó tu punto de quiebre y querés empezar a vivir vínculos que te hagan bien.</p></div>
+        </div>
+      </div>
+    </div>
+    <a class="h2-cta pv-bridge" href="#reserva">Quiero mi lugar</a>
+  </section>
+
+  <section class="xp" id="experiencia">
+    <div class="wrap">
+      <h2 class="xp-title">Un <em>método</em> de <em>3 pasos</em> para destrabar tus vínculos</h2>
+      <p class="xp-sub">Esto es lo que vas a experimentar en el evento online para dejar de repetir la misma historia: identificás, armás tu plan y lo ponés en práctica.</p>
+      <div class="xp-grid">
+        <article class="xp-card" style="--i:0">
+          <img src="IMGPLACEHOLDER" alt="Mujer liberándose, rodeada de fragmentos de creencias limitantes" loading="lazy">
+          <span class="xp-badge">Paso 1</span>
+          <div class="xp-body">
+            <h3>Identificá tu bloqueo</h3>
+            <p>Detectás qué patrón energético te hace repetir la misma historia en tus vínculos y desde dónde lo venís sosteniendo.</p>
+          </div>
+        </article>
+        <article class="xp-card" style="--i:1">
+          <img src="IMGPLACEHOLDER" alt="Mujer meditando en paz, rodeada de energía dorada y azul" loading="lazy">
+          <span class="xp-badge">Paso 2</span>
+          <div class="xp-body">
+            <h3>Armá tu plan de acción</h3>
+            <p>Con lo que identificaste, definís pasos concretos para empezar a destrabar ese bloqueo.</p>
+          </div>
+        </article>
+        <article class="xp-card" style="--i:2">
+          <img src="IMGPLACEHOLDER" alt="Mujer avanzando con una llave y un mapa hacia un nuevo camino" loading="lazy">
+          <span class="xp-badge">Paso 3</span>
+          <div class="xp-body">
+            <h3>Ponelo en práctica</h3>
+            <p>Te llevás ejercicios simples para aplicar desde el día siguiente y sostener el cambio en tus vínculos.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="offer" id="reserva">
+    <div class="pay-card">
+      <span class="pc-corner tl"></span><span class="pc-corner tr"></span><span class="pc-corner bl"></span><span class="pc-corner br"></span>
+
+      <div class="pc-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/></svg>Cupos limitados</div>
+
+      <div class="pc-event">
+        <span class="ev1">Punto de Quiebre</span>
+        <span class="ev-amp">&amp;</span>
+        <span class="ev2">Activación energética</span>
+      </div>
+      <div class="pc-divider"></div>
+      <div class="pc-price"><span class="cur">$</span>24.990<span class="ars">ARS</span></div>
+      <div class="pc-price-label">Inversión del evento online</div>
+
+      <div class="h2-card pc-info">
+        <div class="h2-chips">
+          <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Jueves 22 de octubre</span>
+          <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.2"/><path d="M8.2 8.2a5.4 5.4 0 0 0 0 7.6M15.8 8.2a5.4 5.4 0 0 1 0 7.6M5.3 5.3a9.5 9.5 0 0 0 0 13.4M18.7 5.3a9.5 9.5 0 0 1 0 13.4"/></svg>En vivo por YouTube · 90 min</span>
+          <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/></svg>Activación energética</span>
+        </div>
+        <div class="h2-time">
+          <span class="orb"></span>
+          <div>
+            <div class="t-label">Horario de referencia</div>
+            <div class="t-value">19:30 hs</div>
+            <div class="t-sub">Argentina · Uruguay</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-countdown">
+        <div class="pc-cd-label">El evento comienza en</div>
+        <div class="pc-cd">
+          <span><b id="pcd-days">00</b><small>días</small></span>
+          <span><b id="pcd-hours">00</b><small>hs</small></span>
+          <span><b id="pcd-minutes">00</b><small>min</small></span>
+          <span><b id="pcd-seconds">00</b><small>seg</small></span>
+        </div>
+      </div>
+
+      <!-- Paso 1: registro -->
+      <div id="form-anchor"></div>
+      <form id="registro-form" class="form-block">
+
+        <label for="nombre">Nombre y apellido</label>
+        <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required>
+
+        <label for="telefono">Teléfono (WhatsApp)</label>
+        <input id="telefono" name="telefono" type="tel" placeholder="11 1234 5678" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="tu@mail.com" required>
+
+        <label for="pais">País</label>
+        <div class="select-wrap">
+          <select id="pais" name="pais" required>
+            <option value="" disabled selected>Elegí tu país</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Uruguay">Uruguay</option>
+          </select>
+        </div>
+
+        <div class="form-msg error" id="form-error" style="display:none;">Completá todos los campos para continuar.</div>
+
+        <button type="submit" class="h2-cta pc-btn">Reservar mi lugar</button>
+      </form>
+
+      <!-- Paso 2: pago (se muestra recién después del registro) -->
+      <div id="pago-block" style="display:none;">
+        <p style="font-size:14px;color:var(--crema);margin-bottom:16px;">¡Gracias! Ya registramos tus datos. Ahora sí, completá el pago para asegurar tu lugar:</p>
+        <a class="h2-cta pc-btn" id="mp-btn" href="#" target="_blank" rel="noopener">Pagar mi entrada</a>
+        <p id="mp-loading" style="font-size:13px;color:var(--crema);margin-top:8px;display:none;">Preparando tu link de pago...</p>
+        <div class="cta-sub">Pago seguro con Mercado Pago. Al confirmarse el pago, entrás al grupo de WhatsApp del evento y te llega un mail de confirmación con el link del grupo. El link para ver el evento por YouTube se comparte solo en el grupo.</div>
+      </div>
+    </div>
+
+    <div class="rx">
+      <h2 class="rx-title">Además del evento, <em>vas a recibir</em> recursos especiales para seguir avanzando</h2>
+      <!-- BANNER de recursos: objetos dibujados en SVG (libro, estrella, regalo) -->
+      <div class="rx-banner">
+        <span class="rx-ribbon">Recursos extra</span>
+        <div class="rx-objs">
+          <div class="rx-obj"><svg viewBox="0 0 200 200"><use href="#obj-book"/></svg><span>Guía del evento</span></div>
+          <div class="rx-obj"><svg viewBox="0 0 200 200"><use href="#obj-star"/></svg><span>Beneficios exclusivos</span></div>
+          <div class="rx-obj"><svg viewBox="0 0 200 200"><use href="#obj-gift"/></svg><span>Regalos especiales</span></div>
+        </div>
+        <p class="rx-caption">Recursos pensados para que sigas trabajando sobre lo que identifiques en el evento, incluso después del vivo.</p>
+      </div>
+      <div class="rx-grid">
+          <div class="rx-card" style="--i:0">
+            <div class="rx-inner">
+              <div class="rx-ic rx-ic-real"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#obj-book"/></svg></div>
+              <h3>Guía del evento</h3>
+              <p>Un PDF con los ejercicios y puntos clave del evento para tu desbloqueo energético.</p>
+            </div>
+          </div>
+          <div class="rx-card" style="--i:1">
+            <div class="rx-inner">
+              <div class="rx-ic rx-ic-real"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#obj-star"/></svg></div>
+              <h3>Beneficios exclusivos</h3>
+              <p>Oportunidades especiales para profundizar tu caso.</p>
+            </div>
+          </div>
+          <div class="rx-card" style="--i:2">
+            <div class="rx-inner">
+              <div class="rx-ic rx-ic-real"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#obj-gift"/></svg></div>
+              <h3>Regalos especiales</h3>
+              <p>Sorpresas únicas que vamos a entregar en vivo.</p>
+            </div>
+          </div>
+      </div>
+      <div class="rx-cta-wrap"><a class="h2-cta" href="#reserva">Quiero reservar mi lugar</a></div>
+    </div>
+  </section>
+
+  <section class="bio" id="rodrigo">
+    <div class="bio-stage">
+    <img class="bio-img" src="IMGPLACEHOLDER" alt="Rodrigo Vega, el Brujo Rodrigo">
+    <div class="bio-inner">
+      <div class="bio-text">
+        <h2 class="bio-title">Soy <span>Rodrigo Vega</span></h2>
+        <p>La mayoría me conoce como <b>el Brujo Rodrigo</b>. Hace 19 años que acompaño a personas a través de la sanación, las energías, el esoterismo, el tarot, el péndulo y las limpiezas energéticas.</p>
+        <p>En todo este tiempo aprendí a leer lo que muchas veces la persona todavía no puede poner en palabras. Por eso, en mis consultas, suelo ser yo el que habla primero.</p>
+        <p>Trabajo desde lo que yo llamo el <em>detrás de escena</em>: ese plano donde se destraban las cosas que, desde afuera, parecen imposibles. Me encanta ver a la gente feliz y hacer que las cosas pasen.</p>
+        <p>De ahí nace <span class="bio-ev">Punto de Quiebre &amp; Activación energética</span>, un evento online para que puedas identificar qué patrón se está repitiendo en tus vínculos y dar el primer paso para destrabarlo.</p>
+        <p class="bio-sign">Hacemos que suceda.</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="wrap">
+      <h2>Preguntas frecuentes</h2>
+
+      <details>
+        <summary>¿Cómo participo una vez que pago?</summary>
+        <p>Dejás tus datos y completás el pago. Al confirmarse, entrás al grupo de WhatsApp del evento y te llega un mail de confirmación con el link del grupo. El jueves 22 de octubre, minutos antes de empezar, compartimos en el grupo el link para ver el evento en vivo por YouTube.</p>
+      </details>
+
+      <details>
+        <summary>¿Tengo algún beneficio por asistir al evento?</summary>
+        <p>Sí. Quienes participen en vivo reciben beneficios exclusivos, como una bonificación para su próxima consulta con Rodrigo. Todos los detalles se comparten durante el evento.</p>
+      </details>
+
+      <details>
+        <summary>¿Qué pasa si no puedo asistir en vivo?</summary>
+        <p>Te recomendamos estar presente el jueves 22 de octubre a las 19:30 hs (Argentina y Uruguay), porque los beneficios exclusivos se comparten durante el evento en vivo. Si tenés algún inconveniente, avisanos por el grupo de WhatsApp del evento.</p>
+      </details>
+
+      <details>
+        <summary>¿Es presencial u online? ¿Qué necesito para conectarme?</summary>
+        <p>Es 100% online, en vivo por YouTube. Te conectás desde donde estés: solo necesitás tu celular o computadora con internet y el link que compartimos en el grupo de WhatsApp el día del evento.</p>
+      </details>
+
+      <div style="text-align:center;margin-top:28px;">
+        <a class="cta-btn" href="#reserva">Reservar mi lugar →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <img class="foot-logo" src="IMGPLACEHOLDER" alt="El Brujo Rodrigo — Hacemos que suceda">
+    <div class="foot-ev"><span>Punto de Quiebre</span> <em>&amp; Activación energética</em></div>
+    <div class="foot-date"><span>Jueves 22 de octubre</span> · <span>19:30 hs Argentina / Uruguay</span></div>
+    <div class="foot-copy">© 2026 El Brujo Rodrigo · Todos los derechos reservados.</div>
+  </footer>
+
+</div>
+
+<section id="gracias">
+  <div class="card">
+    <div class="check">✓</div>
+    <h1 class="display">¡Ya estás anotado!</h1>
+    <p class="lead">Reservaste tu lugar para <b>Punto de Quiebre y Activación Energética</b>, jueves 22 de octubre a las 19:30 hs. Una vez confirmado tu pago, entrás al grupo de WhatsApp del evento y te llega un mail con el link del grupo. El link para ver el evento por YouTube se comparte en el grupo.</p>
+    <div class="cta-sub">Cualquier duda, respondé al mail de confirmación que te llegó.</div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('registro-form');
+    var pagoBlock = document.getElementById('pago-block');
+    var errorMsg = document.getElementById('form-error');
+
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorMsg.style.display = 'none';
+
+        var nombre = form.nombre.value.trim();
+        var telefono = form.telefono.value.trim();
+        var email = form.email.value.trim();
+        var pais = form.pais.value;
+
+        if (!nombre || !telefono || !email || !pais) {
+          errorMsg.style.display = 'block';
+          return;
+        }
+
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+
+        var mpBtn = document.getElementById('mp-btn');
+        var mpLoading = document.getElementById('mp-loading');
+
+        // Mostrar el bloque de pago de inmediato con estado "cargando"
+        form.style.display = 'none';
+        pagoBlock.style.display = 'block';
+        mpBtn.style.opacity = '0.5';
+        mpBtn.style.pointerEvents = 'none';
+        mpLoading.style.display = 'block';
+        pagoBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Llamar a la Netlify Function que captura el lead y genera el link de MercadoPago
+        fetch('/.netlify/functions/create-preference', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre: nombre, telefono: telefono, email: email, pais: pais })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            mpLoading.style.display = 'none';
+            if (data.init_point) {
+              mpBtn.href = data.init_point;
+              mpBtn.style.opacity = '1';
+              mpBtn.style.pointerEvents = 'auto';
+            } else {
+              mpBtn.textContent = 'Error — Contactanos por WhatsApp';
+              mpBtn.style.opacity = '1';
+            }
+          })
+          .catch(function () {
+            mpLoading.style.display = 'none';
+            mpBtn.textContent = 'Error — Contactanos por WhatsApp';
+            mpBtn.style.opacity = '1';
+          });
+      });
+    }
+
+    // Pantalla de agradecimiento si en algún momento se agrega una
+    // confirmación server-side que redirija con ?pago=aprobado.
+    var params = new URLSearchParams(window.location.search);
+    var pago = params.get('pago');
+    if (pago === 'aprobado' || pago === 'ok' || pago === 'success' || window.location.hash === '#gracias') {
+      document.body.classList.add('show-gracias');
+      window.scrollTo(0, 0);
+    }
+
+    // Cuenta regresiva hasta el 22 de octubre de 2026, 19:30 hs (Argentina, UTC-3)
+    // Construido con Date.UTC (19:30 hs Argentina = 22:30 UTC) en vez de
+    // parsear un string con offset, que algunos navegadores de celular
+    // interpretan mal y devuelven "Invalid Date".
+    var targetDate = Date.UTC(2026, 9, 22, 22, 30, 0);
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function setAll(id, v) {
+      ['cd-', 'bcd-', 'pcd-'].forEach(function (pre) {
+        var el = document.getElementById(pre + id);
+        if (el) el.textContent = v;
+      });
+    }
+
+    function tick() {
+      var now = new Date().getTime();
+      var diff = targetDate - now;
+
+      if (diff <= 0) {
+        setAll('days', '00'); setAll('hours', '00');
+        setAll('minutes', '00'); setAll('seconds', '00');
+        return;
+      }
+
+      var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      setAll('days', pad(days)); setAll('hours', pad(hours));
+      setAll('minutes', pad(minutes)); setAll('seconds', pad(seconds));
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+
+<script>
+  (function () {
+    var cards = document.querySelectorAll('.pv-card, .xp-card, .rx-card');
+    if (!cards.length) return;
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(function (c) { c.classList.add('in'); });
+      return;
+    }
+    document.documentElement.classList.add('js-anim');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.2 });
+    cards.forEach(function (c) { io.observe(c); });
+  })();
+</script>
+
+<script>
+  (function () {
+    // Todos los botones de reserva llevan directo al formulario y enfocan el primer campo
+    var form = document.getElementById('registro-form');
+    document.querySelectorAll('a[href="#reserva"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var pago = document.getElementById('pago-block');
+        var target = (form && form.style.display !== 'none') ? form : (pago || document.getElementById('reserva'));
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (form && form.style.display !== 'none') {
+          setTimeout(function () { try { form.nombre.focus({ preventScroll: true }); } catch (err) {} }, 650);
+        }
+      });
+    });
+    // Ejemplo de teléfono según el país elegido
+    var pais = document.getElementById('pais'), tel = document.getElementById('telefono');
+    if (pais && tel) pais.addEventListener('change', function () {
+      tel.placeholder = pais.value === 'Uruguay' ? '099 123 456' : '11 1234 5678';
+    });
+  })();
+</script>
+</body>
+</html>
