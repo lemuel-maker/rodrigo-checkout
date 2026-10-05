@@ -98,7 +98,13 @@ exports.handler = async (event) => {
             <p style="margin:4px 0 0 0;font-size:15px;color:#e8d5b0;">En vivo por YouTube</p>
           </div>
           <p style="margin:0 0 24px 0;font-size:15px;color:#e8d5b0;line-height:1.6;">Gracias por confiar en este proceso. Rodrigo te espera para una noche de transformación profunda. El acceso al evento se enviará por el grupo de WhatsApp exclusivo para participantes.</p>
-          <a href="${WHATSAPP_LINK}" style="display:inline-block;background:linear-gradient(135deg,#c9a84c,#e8d5b0);color:#1a0a00;text-decoration:none;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;letter-spacing:1px;">📱 Unirme al Grupo de WhatsApp</a>
+          <table cellpadding="0" cellspacing="0" style="margin:0 auto;">
+            <tr>
+              <td align="center" bgcolor="#c9a84c" style="border-radius:8px;">
+                <a href="${WHATSAPP_LINK}" target="_blank" style="display:inline-block;background-color:#c9a84c;color:#1a0a00;text-decoration:none;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;letter-spacing:1px;font-family:Arial,sans-serif;">📱 Unirme al Grupo de WhatsApp</a>
+              </td>
+            </tr>
+          </table>
         </td></tr>
         <tr><td style="padding:32px 0;text-align:center;">
           <p style="margin:0;font-size:13px;color:#666;line-height:1.6;">Este acceso es personal e intransferible. Guardá este email como comprobante.<br>¿Tenés alguna consulta? Escribinos a soporte@ayresdebahia.com</p>
