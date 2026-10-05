@@ -74,7 +74,7 @@ exports.handler = async (event) => {
           email: email
         },
         back_urls: {
-          success: 'https://chat.whatsapp.com/JYww1H2KlkQ2V5GSmud8vw?s=cl&p=i&mlu=0&ilr=4',
+          success: 'https://brujo-rodrigo.netlify.app/success.html',
           failure: 'https://ayresdebahia.com',
           pending: 'https://ayresdebahia.com'
         },
