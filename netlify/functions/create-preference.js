@@ -78,7 +78,8 @@ exports.handler = async (event) => {
           failure: 'https://ayresdebahia.com',
           pending: 'https://ayresdebahia.com'
         },
-        auto_return: 'approved'
+        auto_return: 'approved',
+        notification_url: 'https://brujo-rodrigo.netlify.app/.netlify/functions/mp-webhook'
       })
     });
 
