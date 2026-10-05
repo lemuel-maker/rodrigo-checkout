@@ -61,9 +61,13 @@ exports.handler = async (event) => {
                 El acceso al evento se enviará por el grupo de WhatsApp exclusivo para participantes.
               </p>
 
-              <a href="${WHATSAPP_LINK}" style="display:inline-block;background:linear-gradient(135deg,#c9a84c,#e8d5b0);color:#1a0a00;text-decoration:none;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;letter-spacing:1px;">
-                📱 Unirme al Grupo de WhatsApp
-              </a>
+              <table cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                <tr>
+                  <td align="center" bgcolor="#c9a84c" style="border-radius:8px;">
+                    <a href="${WHATSAPP_LINK}" target="_blank" style="display:inline-block;background-color:#c9a84c;color:#1a0a00;text-decoration:none;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;letter-spacing:1px;font-family:Arial,sans-serif;">📱 Unirme al Grupo de WhatsApp</a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
