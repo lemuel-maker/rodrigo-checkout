@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>¡Pago Confirmado! | El Brujo Rodrigo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dorado: #c9a66b;
+      --dorado-claro: #e8d5a3;
+      --bg: #0d0a06;
+      --text: #f5efe4;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: url('og-image.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+      padding-top: max(40px, env(safe-area-inset-top));
+      padding-bottom: max(40px, env(safe-area-inset-bottom));
+      position: relative;
+    }
+
+    /* Overlay oscuro sobre la imagen */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,6,2,0.72) 0%, rgba(10,6,2,0.85) 50%, rgba(10,6,2,0.92) 100%);
+      z-index: 0;
+    }
+
+    /* Brillo diagonal que pasa de izquierda a derecha */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        transparent 30%,
+        rgba(201,166,107,0.06) 40%,
+        rgba(201,166,107,0.13) 50%,
+        rgba(201,166,107,0.06) 60%,
+        transparent 70%,
+        transparent 100%
+      );
+      background-size: 250% 100%;
+      background-position: 200% 0;
+      z-index: 0;
+      pointer-events: none;
+      animation: brillo 5s ease-in-out infinite;
+    }
+
+    @keyframes brillo {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .label-top {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 36px;
+      display: block;
+    }
+
+    .card {
+      border: 1px solid rgba(201,166,107,0.4);
+      border-radius: 4px;
+      padding: 48px 32px 40px;
+      background: rgba(13,10,6,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+    }
+
+    /* Esquinas decorativas */
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+    }
+    .card::before {
+      top: -1px; left: -1px;
+      border-top: 2px solid var(--dorado);
+      border-left: 2px solid var(--dorado);
+    }
+    .card::after {
+      bottom: -1px; right: -1px;
+      border-bottom: 2px solid var(--dorado);
+      border-right: 2px solid var(--dorado);
+    }
+
+    .icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+      display: block;
+      animation: pulso 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulso {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.85; }
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: clamp(22px, 5vw, 30px);
+      color: var(--dorado-claro);
+      line-height: 1.25;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .subtitulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--dorado);
+      margin-bottom: 32px;
+    }
+
+    .evento-box {
+      border: 1px solid rgba(201,166,107,0.25);
+      padding: 18px 20px;
+      margin-bottom: 32px;
+      background: rgba(201,166,107,0.06);
+    }
+
+    .evento-nombre {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .evento-fecha {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: #d9cdb8;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-wa {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--dorado), #b8924f);
+      color: #0d0a06;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+      margin-bottom: 20px;
+    }
+    .btn-wa:hover { opacity: 0.88; }
+
+    .redirect-msg {
+      font-size: 12px;
+      color: #8a7d6a;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(201,166,107,0.15);
+      margin: 0 0 20px;
+    }
+
+    .nota {
+      font-size: 12px;
+      color: #7a6e5e;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .nota a {
+      color: var(--dorado);
+      text-decoration: none;
+    }
+
+    #email-status {
+      font-size: 12px;
+      color: var(--dorado-claro);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      min-height: 18px;
+      margin-bottom: 16px;
+    }
+
+    .check { color: #6fcf97; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="label-top">El Brujo Rodrigo</span>
+
+    <div class="card">
+      <span class="icon">✨</span>
+      <h1>¡Tu lugar está confirmado!</h1>
+      <p class="subtitulo">Tu pago fue procesado con éxito</p>
+
+      <div class="evento-box">
+        <p class="evento-nombre">Punto de Quiebre<br>y Activación Energética</p>
+        <p class="evento-fecha">Jueves 22 de octubre · 19:30hs · En vivo por YouTube</p>
+      </div>
+
+      <p id="email-status"></p>
+
+      <a id="btn-wa" class="btn-wa" href="https://chat.whatsapp.com/JYww1H2KlkQ2V5GSmud8vw">
+        📱 Unirme al Grupo de WhatsApp
+      </a>
+
+      <p class="redirect-msg">Vas a ser redirigido automáticamente en <span id="cuenta">6</span>s…</p>
+
+      <hr class="divider">
+
+      <p class="nota">
+        También te enviamos un email de confirmación con todos los detalles.<br>
+        ¿Consultas? <a href="mailto:soporte@ayresdebahia.com">soporte@ayresdebahia.com</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const WHATSAPP = 'https://chat.whatsapp.com/JYww1H2KlkQ2V5GSmud8vw';
+
+    // Datos del comprador guardados antes de ir a MP
+    const nombre = sessionStorage.getItem('br_nombre') || localStorage.getItem('br_nombre') || '';
+    const email  = sessionStorage.getItem('br_email')  || localStorage.getItem('br_email')  || '';
+
+    // Parámetros que devuelve MercadoPago
+    const params    = new URLSearchParams(window.location.search);
+    const paymentId = params.get('payment_id') || params.get('collection_id') || '';
+    const status    = params.get('payment_status') || params.get('collection_status') || '';
+
+    // Enviar email de confirmación
+    async function sendEmail() {
+      if (!email) return;
+      try {
+        const res = await fetch('/.netlify/functions/send-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, email, paymentId, status })
+        });
+        const data = await res.json();
+        if (res.ok && data.ok) {
+          document.getElementById('email-status').innerHTML =
+            '<span class="check">✓</span> Confirmación enviada a ' + email;
+        }
+      } catch (e) {
+        console.error('Email:', e);
+      }
+    }
+    sendEmail();
+
+    // Cuenta regresiva y redirección
+    let seg = 6;
+    const cuentaEl = document.getElementById('cuenta');
+    const timer = setInterval(() => {
+      seg--;
+      if (cuentaEl) cuentaEl.textContent = seg;
+      if (seg <= 0) {
+        clearInterval(timer);
+        window.location.href = WHATSAPP;
+      }
+    }, 1000);
+
+    // Si hace clic manual, cancelar el timer
+    document.getElementById('btn-wa').addEventListener('click', () => clearInterval(timer));
+  </script>
+</body>
+</html>
