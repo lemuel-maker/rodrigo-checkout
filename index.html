@@ -1515,6 +1515,10 @@
         mpLoading.style.display = 'block';
         pagoBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
+        // Guardar datos del comprador para usarlos en success.html
+        localStorage.setItem('br_nombre', nombre);
+        localStorage.setItem('br_email', email);
+
         // Llamar a la Netlify Function que captura el lead y genera el link de MercadoPago
         fetch('/.netlify/functions/create-preference', {
           method: 'POST',
