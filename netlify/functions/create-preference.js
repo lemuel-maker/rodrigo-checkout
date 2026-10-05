@@ -65,7 +65,7 @@ exports.handler = async (event) => {
           {
             title: 'Punto de Quiebre y Activación Energética - Brujo Rodrigo',
             quantity: 1,
-            unit_price: 24990,
+            unit_price: 10,
             currency_id: 'ARS'
           }
         ],
@@ -85,7 +85,7 @@ exports.handler = async (event) => {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(JSON.stringify(data));
+      throw new Error(data.message || 'Error de MercadoPago');
     }
 
     return {
