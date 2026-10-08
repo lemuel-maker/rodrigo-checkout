@@ -17,6 +17,24 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:site_name" content="El Brujo Rodrigo">
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1119159637369519');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1119159637369519&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <!-- Twitter Card (también lo usa WhatsApp a veces) -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Punto de Quiebre y Activación Energética | El Brujo Rodrigo">
@@ -177,28 +195,8 @@
   }
 
 
-  /* video más grande + brillo que circula por el borde */
+  /* video */
   .video-section .wrap{max-width:940px;}
-  .video-frame{
-    padding:3px;
-    border:none !important;
-    background:rgba(201,166,107,0.35) !important;
-    isolation:isolate;
-  }
-  .video-frame::before{
-    content:"";position:absolute;left:50%;top:50%;
-    width:130%;aspect-ratio:1/1;
-    transform:translate(-50%,-50%) rotate(0deg);
-    background:conic-gradient(from 0deg,
-      rgba(255,250,230,0) 0deg, rgba(255,250,230,0) 210deg,
-      rgba(201,166,107,0.95) 290deg, #fff8e6 345deg, rgba(255,250,230,0) 360deg);
-    animation:borde-brillo 4s linear infinite;
-    z-index:0;pointer-events:none;
-  }
-  .video-frame video{position:relative;z-index:1;border-radius:11px;}
-  .video-frame iframe{position:relative;z-index:1;}
-  @keyframes borde-brillo{to{transform:translate(-50%,-50%) rotate(360deg);}}
-  @media (prefers-reduced-motion:reduce){.video-frame::before{animation:none;display:none;}}
 
 
   /* ===== Hero estilo tarjeta (título con brillo dorado) ===== */
@@ -589,6 +587,7 @@
     background:conic-gradient(from 0deg,rgba(255,250,230,0) 0deg,rgba(255,250,230,0) 230deg,rgba(201,166,107,0.95) 300deg,#fff6dc 345deg,rgba(255,250,230,0) 360deg);
     animation:borde-brillo 4s linear infinite;animation-delay:calc(var(--i) * -1.33s);
   }
+  @keyframes borde-brillo{to{transform:translate(-50%,-50%) rotate(360deg);}}
   .rx-inner{
     position:relative;z-index:1;height:100%;border-radius:16.5px;padding:22px 22px 24px;text-align:left;
     display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center;
