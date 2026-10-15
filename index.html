@@ -1832,5 +1832,13 @@ src="https://www.facebook.com/tr?id=1119159637369519&ev=PageView&noscript=1"
     }, { passive: true });
   })();
 </script>
+<script>
+  (function () {
+    if (new URLSearchParams(window.location.search).get('pagar') === '1') {
+      var target = document.getElementById('registro-form') || document.getElementById('reserva');
+      if (target) setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 400);
+    }
+  })();
+</script>
 </body>
 </html>
