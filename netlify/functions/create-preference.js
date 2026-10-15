@@ -74,12 +74,12 @@ exports.handler = async (event) => {
           email: email
         },
         back_urls: {
-          success: 'https://brujo-rodrigo.netlify.app/success.html',
-          failure: 'https://ayresdebahia.com',
-          pending: 'https://ayresdebahia.com'
+          success: 'https://chat.whatsapp.com/JYww1H2KlkQ2V5GSmud8vw',
+          failure: 'https://puntodequiebre-rodrigo.netlify.app',
+          pending: 'https://puntodequiebre-rodrigo.netlify.app'
         },
         auto_return: 'approved',
-        notification_url: 'https://brujo-rodrigo.netlify.app/.netlify/functions/mp-webhook'
+        notification_url: 'https://puntodequiebre-rodrigo.netlify.app/.netlify/functions/mp-webhook'
       })
     });
 
