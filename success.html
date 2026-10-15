@@ -261,7 +261,7 @@
 
       <p class="nota">
         También te enviamos un email de confirmación con todos los detalles.<br>
-        ¿Consultas? <a href="mailto:soporte@ayresdebahia.com">soporte@ayresdebahia.com</a>
+        ¿Consultas? <a href="mailto:soporte@ayresdebahia.com">soporte@ayresdebahia.com</a> · <a href="https://wa.me/541154165342" target="_blank">WhatsApp</a>
       </p>
     </div>
   </div>
@@ -269,14 +269,19 @@
   <script>
     const WHATSAPP = 'https://chat.whatsapp.com/JYww1H2KlkQ2V5GSmud8vw';
 
-    // Datos del comprador guardados antes de ir a MP
-    const nombre = sessionStorage.getItem('br_nombre') || localStorage.getItem('br_nombre') || '';
-    const email  = sessionStorage.getItem('br_email')  || localStorage.getItem('br_email')  || '';
-
     // Parámetros que devuelve MercadoPago
     const params    = new URLSearchParams(window.location.search);
     const paymentId = params.get('payment_id') || params.get('collection_id') || '';
     const status    = params.get('payment_status') || params.get('collection_status') || '';
+
+    // Verificar que el pago fue aprobado — si no, redirigir a la landing
+    if (status && status !== 'approved') {
+      window.location.replace('https://puntodequiebre-rodrigo.netlify.app/?pago=' + status);
+    }
+
+    // Datos del comprador guardados antes de ir a MP
+    const nombre = sessionStorage.getItem('br_nombre') || localStorage.getItem('br_nombre') || '';
+    const email  = sessionStorage.getItem('br_email')  || localStorage.getItem('br_email')  || '';
 
     // Enviar email de confirmación
     async function sendEmail() {
