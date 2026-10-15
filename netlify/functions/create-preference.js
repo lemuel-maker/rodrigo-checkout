@@ -74,9 +74,9 @@ exports.handler = async (event) => {
           email: email
         },
         back_urls: {
-          success: 'https://chat.whatsapp.com/JYww1H2KlkQ2V5GSmud8vw',
-          failure: 'https://puntodequiebre-rodrigo.netlify.app',
-          pending: 'https://puntodequiebre-rodrigo.netlify.app'
+          success: 'https://puntodequiebre-rodrigo.netlify.app/success.html',
+          failure: 'https://puntodequiebre-rodrigo.netlify.app/failure.html',
+          pending: 'https://puntodequiebre-rodrigo.netlify.app/failure.html'
         },
         auto_return: 'approved',
         notification_url: 'https://puntodequiebre-rodrigo.netlify.app/.netlify/functions/mp-webhook'
